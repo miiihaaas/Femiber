@@ -142,12 +142,14 @@ def home():
                                 unique_motherhood_list=unique_motherhood_list,
                                 unique_violence_list=unique_violence_list,
                                 unique_passing_away_list=unique_passing_away_list,
+                                filter_people_value=None, #! da nema preselektovanu opciju people
                                 filtered_cases=filtered_cases)
 
 
 @main.route('/update_fiters', methods=["POST"])
 def update_filters():
     # get checked options
+    filter_people_value = request.form.getlist('people')
     filter_consang_kinship_value = request.form.getlist('kinship')
     filter_religion_value = request.form.getlist('religion')
     filter_religion_flag_value = request.form.getlist('religion_flag')
@@ -156,6 +158,7 @@ def update_filters():
     filter_motherhood_value = request.form.getlist('motherhood')
     filter_physical_violence_value = request.form.getlist('violence')
     filter_passing_away_value = request.form.getlist('passing_away')
+    print(f'{filter_people_value=}')
     print(f'{filter_consang_kinship_value=}')
     print(f'{filter_religion_value=}')
     print(f'{filter_religion_flag_value=}')
@@ -168,6 +171,11 @@ def update_filters():
     filtered_cases, unique_kinships_list, unique_religion_list, unique_religion_flag_list, unique_traits_list, unique_partnership_list, unique_motherhood_list, unique_violence_list, unique_passing_away_list = filter_cases(filter_consang_kinship_value, filter_religion_value, filter_religion_flag_value,
                                                                                                                                                                                                 filter_traits_value, filter_partnership_value, filter_motherhood_value,
                                                                                                                                                                                                 filter_physical_violence_value, filter_passing_away_value)
+    if any(filter_people_value + filter_consang_kinship_value + filter_religion_value + filter_religion_flag_value + filter_traits_value + filter_partnership_value + filter_motherhood_value + filter_physical_violence_value + filter_passing_away_value):
+        criteria_options = True
+    else:
+        criteria_options = False
+    
     return render_template('home.html',
                         filtered_cases=filtered_cases,
                         unique_kinships_list=unique_kinships_list,
@@ -178,6 +186,8 @@ def update_filters():
                         unique_motherhood_list=unique_motherhood_list,
                         unique_violence_list=unique_violence_list,
                         unique_passing_away_list=unique_passing_away_list,
+                        
+                        filter_people_value=filter_people_value,
                         filter_consang_kinship_value=filter_consang_kinship_value,
                         filter_religion_value=filter_religion_value,
                         filter_religion_flag_value=filter_religion_flag_value,
@@ -185,5 +195,7 @@ def update_filters():
                         filter_partnership_value=filter_partnership_value,
                         filter_motherhood_value=filter_motherhood_value,
                         filter_physical_violence_value=filter_physical_violence_value,
-                        filter_passing_away_value=filter_passing_away_value
+                        filter_passing_away_value=filter_passing_away_value,
+                        
+                        criteria_options=criteria_options
                         )

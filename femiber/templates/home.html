@@ -4,281 +4,362 @@
 <h1 class="mb-4" style="text-align: center;  font-size: xx-large;">People</h1>
 <div class="row">
     <div class="col-lg-2">
-            <div id="accordion">
-                {% if unique_kinships_list %}
-                <div class="card">
-                    <div class="card-header" id="headingKinship">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseKinship" aria-expanded="true" aria-controls="collapseKinship">
-                                Kinship
-                            </button>
-                        </h5>
-                    </div>
-                    <div id="collapseKinship" class="collapse show" aria-labelledby="headingKinship" data-parent="#accordion">
-                        <div class="card-body">
-                            <table class="table">
-                                <tbody>
-                                    {% for filter in unique_kinships_list %}
-                                    <tr>
-                                        <td>
-                                            {% if filter in filter_consang_kinship_value %}
-                                            <input type="checkbox" id="kinship_{{ filter }}" name="kinship" value="{{ filter }}" checked>
-                                            {% else %}
-                                            <input type="checkbox" id="kinship_{{ filter }}" name="kinship" value="{{ filter }}" >
-                                            {% endif %}
-                                            <label for="kinship_{{ filter }}">{{ filter }}</label>
-                                        </td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
+        <h3>Filter by</h3>
+        <div id="accordion">
+            <div class="card">
+                <div class="card-header" id="headingPeople">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapsePeople" aria-expanded="true" aria-controls="collapsePeople">
+                            People
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapsePeople" class="collapse show" aria-labelledby="headingPeople" data-parent="#accordion">
+                    <div class="body-card">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        {% if filter_people_value[0] == "individual" %}
+                                        <input type="radio" id="people_individual" name="people" value="individual" checked>
+                                        {% else %}
+                                        <input type="radio" id="people_individual" name="people" value="individual">
+                                        {% endif %}
+                                        <label for="people_individual">Anon. individual</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        {% if filter_people_value[0] == "groups" %}
+                                        <input type="radio" id="people_groups" name="people" value="groups" checked>
+                                        {% else %}
+                                        <input type="radio" id="people_groups" name="people" value="groups">
+                                        {% endif %}
+                                        <label for="people_groups">Anon. groups</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        {% if filter_people_value[0] == "name" %}
+                                        <input type="radio" id="people_name" name="people" value="name" checked>
+                                        {% else %}
+                                        <input type="radio" id="people_name" name="people" value="name">
+                                        {% endif %}
+                                        <label for="people_name">Name</label>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                {% endif %}
-                {% if unique_religion_list %}
-                <div class="card">
-                    <div class="card-header" id="headingReligion">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseReligion" aria-expanded="true" aria-controls="collapseReligion">
-                                Religion
-                            </button>
-                        </h5>
-                    </div>
-                    <div id="collapseReligion" class="collapse show" aria-labelledby="headingReligion" data-parent="#accordion">
-                        <div class="card-body">
-                            <table class="table">
-                                <tbody>
-                                    {% for religion in unique_religion_list %}
-                                    <tr>
-                                        <td>
-                                            {% if religion in filter_religion_value %}
-                                            <input type="checkbox" id="religion_{{ religion }}" name="religion" value="{{ religion }}" checked>
-                                            {% else %}
-                                            <input type="checkbox" id="religion_{{ religion }}" name="religion" value="{{ religion }}">
-                                            {% endif %}
-                                            <label for="religion_{{ religion }}">{{ religion }}</label>
-                                        </td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                {% endif %}
-                {% if unique_religion_flag_list %}
-                <div class="card">
-                    <div class="card-header" id="headingReligionFlag">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseReligionFlag" aria-expanded="true" aria-controls="collapseReligionFlag">
-                                Religion Flag
-                            </button>
-                        </h5>
-                    </div>
-                    <div id="collapseReligionFlag" class="collapse show" aria-labelledby="headingReligionFlag" data-parent="#accordion">
-                        <div class="card-body">
-                            <table class="table">
-                                <tbody>
-                                    {% for religion in unique_religion_flag_list %}
-                                    <tr>
-                                        <td>
-                                            {% if religion in filter_religion_flag_value %}
-                                            <input type="checkbox" id="religion_flag_{{ religion }}" name="religion_flag" value="{{ religion }}" checked>
-                                            {% else %}
-                                            <input type="checkbox" id="religion_flag_{{ religion }}" name="religion_flag" value="{{ religion }}">
-                                            {% endif %}
-                                            <label for="religion_flag_{{ religion }}">{{ religion }}</label>
-                                        </td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                {% endif %}
-                {% if unique_traits_list %}
-                <div class="card">
-                    <div class="card-header" id="headingTraits">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseTraits" aria-expanded="true" aria-controls="collapseTraits">
-                                Traits
-                            </button>
-                        </h5>
-                    </div>
-                    <div id="collapseTraits" class="collapse show" aria-labelledby="headingTraits" data-parent="#accordion">
-                        <div class="card-body">
-                            <table class="table">
-                                <tbody>
-                                    {% for trait in unique_traits_list %}
-                                    <tr>
-                                        <td>
-                                            {% if trait in filter_traits_value %}
-                                            <input type="checkbox" id="trait_{{ trait }}" name="trait" value="{{ trait }}" checked>
-                                            {% else %}
-                                            <input type="checkbox" id="trait_{{ trait }}" name="trait" value="{{ trait }}" >
-                                            {% endif %}
-                                            <label for="trait_{{ trait }}">{{ trait }}</label>
-                                        </td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                {% endif %}
-                {% if unique_partnership_list %}
-                <div class="card">
-                    <div class="card-header" id="headingPartnership">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapsePartnership" aria-expanded="true" aria-controls="collapsePartnership">
-                                Marital status (Partnership)
-                            </button>
-                        </h5>
-                    </div>
-                    <div id="collapsePartnership" class="collapse show" aria-labelledby="headingPartnership" data-parent="#accordion">
-                        <div class="card-body">
-                            <table class="table">
-                                <tbody>
-                                    {% for partnership in unique_partnership_list %}
-                                    <tr>
-                                        <td>
-                                            {% if partnership in filter_partnership_value %}
-                                            <input type="checkbox" id="partnership_{{ partnership }}" name="partnership" value="{{ partnership }}" checked>
-                                            {% else %}
-                                            <input type="checkbox" id="partnership_{{ partnership }}" name="partnership" value="{{ partnership }}">
-                                            {% endif %}
-                                            <label for="partnership_{{ partnership }}">{{ partnership }}</label>
-                                        </td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                {% endif %}
-                {% if unique_motherhood_list %}
-                <div class="card">
-                    <div class="card-header" id="headingMotherhood">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseMotherhood" aria-expanded="true" aria-controls="collapseMotherhood">
-                                Motherhood
-                            </button>
-                        </h5>
-                    </div>
-                    <div id="collapseMotherhood" class="collapse show" aria-labelledby="headingMotherhood" data-parent="#accordion">
-                        <div class="card-body">
-                            <table class="table">
-                                <tbody>
-                                    {% for motherhood in unique_motherhood_list %}
-                                    <tr>
-                                        <td>
-                                            {% if motherhood in filter_motherhood_value %}
-                                            <input type="checkbox" id="mothergood_{{ motherhood }}" name="motherhood" value="{{ motherhood }}" checked>
-                                            {% else %}
-                                            <input type="checkbox" id="mothergood_{{ motherhood }}" name="motherhood" value="{{ motherhood }}">
-                                            {% endif %}
-                                            <label for="mothergood_{{ motherhood }}">{{ motherhood }}</label>
-                                        </td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                {% endif %}
-                {% if unique_violence_list %}
-                <div class="card">
-                    <div class="card-header" id="headingViolence">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseViolence" aria-expanded="true" aria-controls="collapseViolence">
-                                Violence & Transgression
-                            </button>
-                        </h5>
-                    </div>
-                    <div id="collapseViolence" class="collapse show" aria-labelledby="headingViolence" data-parent="#accordion">
-                        <div class="card-body">
-                            <table class="table">
-                                <tbody>
-                                    {% for violence in unique_violence_list %}
-                                    <tr>
-                                        <td>
-                                            {% if violence in filter_physical_violence_value %}
-                                            <input type="checkbox" id="violence_{{ violence }}" name="violence" value="{{ violence }}" checked>
-                                            {% else %}
-                                            <input type="checkbox" id="violence_{{ violence }}" name="violence" value="{{ violence }}">
-                                            {% endif %}
-                                            <label for="violence_{{ violence }}">{{ violence }}</label>
-                                        </td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                {% endif %}
-                {% if unique_passing_away_list %}
-                <div class="card">
-                    <div class="card-header" id="headingPassingAway">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapsePassingAway" aria-expanded="true" aria-controls="collapsePassingAway">
-                                Death
-                            </button>
-                        </h5>
-                    </div>
-                    <div id="collapsePassingAway" class="collapse show" aria-labelledby="headingPassingAway" data-parent="#accordion">
-                        <div class="card-body">
-                            <table class="table">
-                                <tbody>
-                                    {% for passing_away in unique_passing_away_list %}
-                                    <tr>
-                                        <td>
-                                            {% if passing_away in filter_passing_away_value %}
-                                            <input type="checkbox" id="passing_away_{{ passing_away }}" name="passing_away" value="{{ passing_away }}" checked>
-                                            {% else %}
-                                            <input type="checkbox" id="passing_away_{{ passing_away }}" name="passing_away" value="{{ passing_away }}">
-                                            {% endif %}
-                                            <label for="passing_away_{{ passing_away }}">{{ passing_away }}</label>
-                                        </td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                {% endif %}
-            
-                <!-- Repeat the above structure for other lists -->
             </div>
+            {% if unique_kinships_list %}
+            <div class="card">
+                <div class="card-header" id="headingKinship">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseKinship" aria-expanded="true" aria-controls="collapseKinship">
+                            Kinship
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseKinship" class="collapse show" aria-labelledby="headingKinship" data-parent="#accordion">
+                    <div class="card-body">
+                        <table class="table">
+                            <tbody>
+                                {% for filter in unique_kinships_list %}
+                                <tr>
+                                    <td>
+                                        {% if filter in filter_consang_kinship_value %}
+                                        <input type="checkbox" id="kinship_{{ filter }}" name="kinship" value="{{ filter }}" checked>
+                                        {% else %}
+                                        <input type="checkbox" id="kinship_{{ filter }}" name="kinship" value="{{ filter }}" >
+                                        {% endif %}
+                                        <label for="kinship_{{ filter }}">{{ filter }}</label>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% if unique_religion_list %}
+            <div class="card">
+                <div class="card-header" id="headingReligion">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseReligion" aria-expanded="true" aria-controls="collapseReligion">
+                            Religion
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseReligion" class="collapse show" aria-labelledby="headingReligion" data-parent="#accordion">
+                    <div class="card-body">
+                        <table class="table">
+                            <tbody>
+                                {% for religion in unique_religion_list %}
+                                <tr>
+                                    <td>
+                                        {% if religion in filter_religion_value %}
+                                        <input type="checkbox" id="religion_{{ religion }}" name="religion" value="{{ religion }}" checked>
+                                        {% else %}
+                                        <input type="checkbox" id="religion_{{ religion }}" name="religion" value="{{ religion }}">
+                                        {% endif %}
+                                        <label for="religion_{{ religion }}">{{ religion }}</label>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% if unique_religion_flag_list %}
+            <div class="card">
+                <div class="card-header" id="headingReligionFlag">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseReligionFlag" aria-expanded="true" aria-controls="collapseReligionFlag">
+                            Religion Flag
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseReligionFlag" class="collapse show" aria-labelledby="headingReligionFlag" data-parent="#accordion">
+                    <div class="card-body">
+                        <table class="table">
+                            <tbody>
+                                {% for religion in unique_religion_flag_list %}
+                                <tr>
+                                    <td>
+                                        {% if religion in filter_religion_flag_value %}
+                                        <input type="checkbox" id="religion_flag_{{ religion }}" name="religion_flag" value="{{ religion }}" checked>
+                                        {% else %}
+                                        <input type="checkbox" id="religion_flag_{{ religion }}" name="religion_flag" value="{{ religion }}">
+                                        {% endif %}
+                                        <label for="religion_flag_{{ religion }}">{{ religion }}</label>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% if unique_traits_list %}
+            <div class="card">
+                <div class="card-header" id="headingTraits">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseTraits" aria-expanded="true" aria-controls="collapseTraits">
+                            Traits
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseTraits" class="collapse show" aria-labelledby="headingTraits" data-parent="#accordion">
+                    <div class="card-body">
+                        <table class="table">
+                            <tbody>
+                                {% for trait in unique_traits_list %}
+                                <tr>
+                                    <td>
+                                        {% if trait in filter_traits_value %}
+                                        <input type="checkbox" id="trait_{{ trait }}" name="trait" value="{{ trait }}" checked>
+                                        {% else %}
+                                        <input type="checkbox" id="trait_{{ trait }}" name="trait" value="{{ trait }}" >
+                                        {% endif %}
+                                        <label for="trait_{{ trait }}">{{ trait }}</label>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% if unique_partnership_list %}
+            <div class="card">
+                <div class="card-header" id="headingPartnership">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapsePartnership" aria-expanded="true" aria-controls="collapsePartnership">
+                            Marital status (Partnership)
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapsePartnership" class="collapse show" aria-labelledby="headingPartnership" data-parent="#accordion">
+                    <div class="card-body">
+                        <table class="table">
+                            <tbody>
+                                {% for partnership in unique_partnership_list %}
+                                <tr>
+                                    <td>
+                                        {% if partnership in filter_partnership_value %}
+                                        <input type="checkbox" id="partnership_{{ partnership }}" name="partnership" value="{{ partnership }}" checked>
+                                        {% else %}
+                                        <input type="checkbox" id="partnership_{{ partnership }}" name="partnership" value="{{ partnership }}">
+                                        {% endif %}
+                                        <label for="partnership_{{ partnership }}">{{ partnership }}</label>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% if unique_motherhood_list %}
+            <div class="card">
+                <div class="card-header" id="headingMotherhood">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseMotherhood" aria-expanded="true" aria-controls="collapseMotherhood">
+                            Motherhood
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseMotherhood" class="collapse show" aria-labelledby="headingMotherhood" data-parent="#accordion">
+                    <div class="card-body">
+                        <table class="table">
+                            <tbody>
+                                {% for motherhood in unique_motherhood_list %}
+                                <tr>
+                                    <td>
+                                        {% if motherhood in filter_motherhood_value %}
+                                        <input type="checkbox" id="mothergood_{{ motherhood }}" name="motherhood" value="{{ motherhood }}" checked>
+                                        {% else %}
+                                        <input type="checkbox" id="mothergood_{{ motherhood }}" name="motherhood" value="{{ motherhood }}">
+                                        {% endif %}
+                                        <label for="mothergood_{{ motherhood }}">{{ motherhood }}</label>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% if unique_violence_list %}
+            <div class="card">
+                <div class="card-header" id="headingViolence">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseViolence" aria-expanded="true" aria-controls="collapseViolence">
+                            Violence & Transgression
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseViolence" class="collapse show" aria-labelledby="headingViolence" data-parent="#accordion">
+                    <div class="card-body">
+                        <table class="table">
+                            <tbody>
+                                {% for violence in unique_violence_list %}
+                                <tr>
+                                    <td>
+                                        {% if violence in filter_physical_violence_value %}
+                                        <input type="checkbox" id="violence_{{ violence }}" name="violence" value="{{ violence }}" checked>
+                                        {% else %}
+                                        <input type="checkbox" id="violence_{{ violence }}" name="violence" value="{{ violence }}">
+                                        {% endif %}
+                                        <label for="violence_{{ violence }}">{{ violence }}</label>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% if unique_passing_away_list %}
+            <div class="card">
+                <div class="card-header" id="headingPassingAway">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapsePassingAway" aria-expanded="true" aria-controls="collapsePassingAway">
+                            Death
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapsePassingAway" class="collapse show" aria-labelledby="headingPassingAway" data-parent="#accordion">
+                    <div class="card-body">
+                        <table class="table">
+                            <tbody>
+                                {% for passing_away in unique_passing_away_list %}
+                                <tr>
+                                    <td>
+                                        {% if passing_away in filter_passing_away_value %}
+                                        <input type="checkbox" id="passing_away_{{ passing_away }}" name="passing_away" value="{{ passing_away }}" checked>
+                                        {% else %}
+                                        <input type="checkbox" id="passing_away_{{ passing_away }}" name="passing_away" value="{{ passing_away }}">
+                                        {% endif %}
+                                        <label for="passing_away_{{ passing_away }}">{{ passing_away }}</label>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        
+            <!-- Repeat the above structure for other lists -->
         </div>
-        <div class="col">
+    </div>
+    <div class="col-lg-2">
+        <div>
+            {% if criteria_options %}
+                <h3>Criteria</h3>
+                <a class="btn" href="{{ url_for('main.home') }}">Clear criteria</a>
+            {% else %}
+                <h3>Criteria</h3>
+                <p>None</p>
+            {% endif %}
+            {% if filter_people_value %}
+            <p>People: {{ filter_people_value[0] }}</p>
+            {% endif %}
+            {% if filter_consang_kinship_value %}
+            <p>Kindship: {% for item in filter_consang_kinship_value %}  {{ item }} | {% endfor %} </p>
+            {% endif %}
+            {% if filter_religion_value %}
+            <p>Religion: {% for item in filter_religion_value %}  {{ item }} | {% endfor %} </p>
+            {% endif %}
+            {% if filter_religion_flag_value %}
+            <p>Religion flag: {% for item in filter_religion_flag_value %}  {{ item }} | {% endfor %} </p>
+            {% endif %}
+            {% if filter_traits_value %}
+            <p>Traits: {% for item in filter_traits_value %}  {{ item }} | {% endfor %} </p>
+            {% endif %}
+            {% if filter_partnership_value %}
+            <p>Partnership: {% for item in filter_partnership_value %}  {{ item }} | {% endfor %} </p>
+            {% endif %}
+            {% if filter_motherhood_value %}
+            <p>Motherhood: {% for item in filter_motherhood_value %}  {{ item }} | {% endfor %} </p>
+            {% endif %}
+            {% if filter_physical_violence_value %}
+            <p>Violence & Transgression: {% for item in filter_physical_violence_value %}  {{ item }} | {% endfor %} </p>
+            {% endif %}
+            {% if filter_passing_away_value %}
+            <p>Death: {% for item in filter_passing_away_value %}  {{ item }} | {% endfor %} </p>
+            {% endif %}
+            
+        </div>
+        <div>
+            <h3>Results</h3>
             {% for case in filtered_cases %}
-            <div>
-                <input type="text" value="{{ case.id }}" >
-                <textarea name="" id="" cols="70" rows="10">{{ case.case_summary }}</textarea>
-            </div>
+            <input class="form-control" type="text" value="{{ case.cases_people.standard_name }}" >
             {% endfor %}
         </div>
     </div>
+    <div class="col">
+        opširniji tekst koji treba da bude promenjiv u odnosu na selektovanu vrednost u drugom stupcu
+    </div>
+</div>
 </form>
 
 
 {% endblock content%}
 
 {% block scripts %}
-<script>
-    $('.collapse').collapse();
-
-    $('.card-header button').click(function() {
-        $(this).toggleClass('collapsed');
-    });
-</script>
 <script>
     var checkboxes = document.querySelectorAll('input[type="checkbox"]');
     checkboxes.forEach(function(checkbox) {

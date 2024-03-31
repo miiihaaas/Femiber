@@ -8,11 +8,12 @@ class People(db.Model):
     recorded_names = db.Column(db.String(255))
     about = db.Column(db.Text)
     chapters_rubrics = db.Column(db.String(350))
+    cases = db.relationship('Cases', backref='cases_people', lazy=True)
 
 
 class Cases(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    person_id = db.Column(db.Integer)
+    person_id = db.Column(db.Integer, db.ForeignKey('people.id'), nullable=False)
     consang_kinship = db.Column(db.String(255))
     religion = db.Column(db.String(255))
     religion_flag = db.Column(db.String(255))
