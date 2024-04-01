@@ -14,6 +14,15 @@ DELETE from cases;
 ALTER TABLE cases
 DROP COLUMN problems;
 
+UPDATE people
+SET people_filter = 
+    CASE 
+        WHEN standard_name LIKE 'Anonymae%' THEN 'groups'
+        WHEN standard_name LIKE 'Anonyma%' THEN 'individual'
+        ELSE SUBSTRING(standard_name, 1, 1)
+    END;
+
+
 
 INSERT INTO cases (id, person_id, consang_kinship, religion, religion_flag, traits, partnership, motherhood, physical_violence, passing_away, case_summary, excerpt, reference, notes)
 VALUES

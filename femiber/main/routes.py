@@ -3,19 +3,34 @@ from flask import Blueprint, jsonify, render_template_string
 from femiber.models import People, Cases
 from flask import render_template, redirect, url_for, flash, request
 from femiber import db
-from sqlalchemy import or_, and_
+from sqlalchemy import or_, and_, not_
 from itertools import chain
 
 
 main = Blueprint('main', __name__)
 
-def filter_cases(filter_consang_kinship_value, filter_religion_value, filter_religion_flag_value,
+def filter_cases(filter_people_value, filter_consang_kinship_value, filter_religion_value, filter_religion_flag_value,
                 filter_traits_value, filter_partnership_value, filter_motherhood_value,
                 filter_physical_violence_value, filter_passing_away_value):
     query = Cases.query  # Početni upit sa svim zapisima
     filters = []  # Lista filtera koje ćemo primenjivati redom
 
     # Dodavanje filtera u listu, preskačemo prazne filtere
+    
+    if filter_people_value:
+        if filter_people_value[0] == "individual":
+            people_filters = Cases.cases_people.has(People.people_filter.contains("individual"))
+            print(f'{people_filters=}')
+            filters.append(people_filters)
+        elif filter_people_value[0] == "groups":
+            people_filters = Cases.cases_people.has(People.people_filter.contains("groups"))
+            filters.append(people_filters)
+        elif filter_people_value[0] == "name":
+            people_filters = Cases.cases_people.has(not_(People.people_filter.contains("groups")) & not_(People.people_filter.contains("individual")))
+            filters.append(people_filters)
+        else:
+            print('nije prošao individual')
+
     if filter_consang_kinship_value:
         consang_filters = [Cases.consang_kinship.contains(value) for value in filter_consang_kinship_value]
         filters.append(or_(*consang_filters))
@@ -43,6 +58,8 @@ def filter_cases(filter_consang_kinship_value, filter_religion_value, filter_rel
 
     # Primena filtera redom na početni upit
     query = query.filter(and_(*filters))
+    unique_people_list = list(set([record.cases_people.people_filter for record in query.all()]))
+
     unique_kinships_list = list(set([string for record in query.all() for string in json.loads(record.consang_kinship)]))
     unique_religion_list = list(set([string for record in query.all() for string in json.loads(record.religion)]))
     unique_religion_flag_list = list(set([string for record in query.all() for string in json.loads(record.religion_flag)]))
@@ -52,7 +69,9 @@ def filter_cases(filter_consang_kinship_value, filter_religion_value, filter_rel
     unique_violence_list = list(set([string for record in query.all() for string in json.loads(record.physical_violence)]))
     unique_passing_away_list = list(set([string for record in query.all() for string in json.loads(record.passing_away)]))
 
-    return query.all(), unique_kinships_list, unique_religion_list, unique_religion_flag_list, unique_traits_list, unique_partnership_list, unique_motherhood_list, unique_violence_list, unique_passing_away_list
+    filtered_cases = query.all()
+    
+    return filtered_cases, unique_people_list, unique_kinships_list, unique_religion_list, unique_religion_flag_list, unique_traits_list, unique_partnership_list, unique_motherhood_list, unique_violence_list, unique_passing_away_list
 
 
 @main.route("/", methods=['GET', 'POST'])
@@ -75,7 +94,7 @@ def home():
         print(f'{filter_partnership_value=}')
         print(f'{filter_motherhood_value=}')
 
-        filtered_cases, unique_kinships_list, unique_religion_list, unique_religion_flag_list, unique_traits_list, unique_partnership_list, unique_motherhood_list, unique_violence_list, unique_passing_away_list = filter_cases(filter_consang_kinship_value, filter_religion_value, filter_religion_flag_value,
+        filtered_cases, unique_people_list, unique_kinships_list, unique_religion_list, unique_religion_flag_list, unique_traits_list, unique_partnership_list, unique_motherhood_list, unique_violence_list, unique_passing_away_list = filter_cases(filter_consang_kinship_value, filter_religion_value, filter_religion_flag_value,
                                                                                                                                                                                                         filter_traits_value, filter_partnership_value, filter_motherhood_value,
                                                                                                                                                                                                         filter_physical_violence_value, filter_passing_away_value)
         # Možete iterirati kroz rezultate ili ih obraditi na drugi način
@@ -84,6 +103,7 @@ def home():
             print(case.id, case.consang_kinship, case.religion, case.religion_flag,
                 case.traits, case.partnership, case.motherhood, case.physical_violence, case.passing_away)
         print('-------------------------------------------------------------------------------------------------------------------------------')
+        print(f'home|post > {unique_people_list=}')
         print('END OF TESTING')
         
         return render_template('home.html',
@@ -99,6 +119,7 @@ def home():
         people = People.query.all()
         
         #! Primer korišćenja funkcije za filtriranje - treba da se dobije iz HTML fajla selektovane vrednosti u obliku liste
+        filter_people_value = []
         filter_consang_kinship_value = []  # Promenljiva vrednost filtera za consang_kinship
         filter_religion_value = []  # Promenljiva vrednost filtera za religion
         filter_religion_flag_value = []  # Promenljiva vrednost filtera za religion_flag
@@ -108,7 +129,7 @@ def home():
         filter_physical_violence_value = []  # Promenljiva vrednost filtera za physical_violence
         filter_passing_away_value = []  # Promenljiva vrednost filtera za passing_away
 
-        filtered_cases, unique_kinships_list, unique_religion_list, unique_religion_flag_list, unique_traits_list, unique_partnership_list, unique_motherhood_list, unique_violence_list, unique_passing_away_list = filter_cases(filter_consang_kinship_value, filter_religion_value, filter_religion_flag_value,
+        filtered_cases, unique_people_list, unique_kinships_list, unique_religion_list, unique_religion_flag_list, unique_traits_list, unique_partnership_list, unique_motherhood_list, unique_violence_list, unique_passing_away_list = filter_cases(filter_people_value, filter_consang_kinship_value, filter_religion_value, filter_religion_flag_value,
                                                                                                                                                                                                                 filter_traits_value, filter_partnership_value, filter_motherhood_value,
                                                                                                                                                                                                                 filter_physical_violence_value, filter_passing_away_value)
 
@@ -118,6 +139,7 @@ def home():
             print(case.id, case.consang_kinship, case.religion, case.religion_flag,
                 case.traits, case.partnership, case.motherhood, case.physical_violence, case.passing_away)
         print('-------------------------------------------------------------------------------------------------------------------------------')
+        print(f'home|else > {unique_people_list=}')
         print('END OF TESTING')
         
         
@@ -168,9 +190,17 @@ def update_filters():
     print(f'{filter_physical_violence_value=}')
     print(f'{filter_passing_away_value=}')
     
-    filtered_cases, unique_kinships_list, unique_religion_list, unique_religion_flag_list, unique_traits_list, unique_partnership_list, unique_motherhood_list, unique_violence_list, unique_passing_away_list = filter_cases(filter_consang_kinship_value, filter_religion_value, filter_religion_flag_value,
+    filtered_cases, unique_people_list, unique_kinships_list, unique_religion_list, unique_religion_flag_list, unique_traits_list, unique_partnership_list, unique_motherhood_list, unique_violence_list, unique_passing_away_list = filter_cases(filter_people_value, filter_consang_kinship_value, filter_religion_value, filter_religion_flag_value,
                                                                                                                                                                                                 filter_traits_value, filter_partnership_value, filter_motherhood_value,
                                                                                                                                                                                                 filter_physical_violence_value, filter_passing_away_value)
+    print('-------------------------------------------------------------------------------------------------------------------------------')
+    for case in filtered_cases:
+        print(case.id, case.consang_kinship, case.religion, case.religion_flag,
+            case.traits, case.partnership, case.motherhood, case.physical_violence, case.passing_away)
+    print('-------------------------------------------------------------------------------------------------------------------------------')
+    print(f'update_filters > {unique_people_list=}')
+    print('END OF TESTING')
+    
     if any(filter_people_value + filter_consang_kinship_value + filter_religion_value + filter_religion_flag_value + filter_traits_value + filter_partnership_value + filter_motherhood_value + filter_physical_violence_value + filter_passing_away_value):
         criteria_options = True
     else:
@@ -199,3 +229,13 @@ def update_filters():
                         
                         criteria_options=criteria_options
                         )
+
+
+@main.route('/contact')
+def contact():
+    return render_template('contact.html')
+
+
+@main.route('/database_codebook')
+def database_codebook():
+    return render_template('database_codebook.html')

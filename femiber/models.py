@@ -8,6 +8,7 @@ class People(db.Model):
     recorded_names = db.Column(db.String(255))
     about = db.Column(db.Text)
     chapters_rubrics = db.Column(db.String(350))
+    people_filter = db.Column(db.String(255))
     cases = db.relationship('Cases', backref='cases_people', lazy=True)
 
 
