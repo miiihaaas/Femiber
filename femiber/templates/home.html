@@ -3,13 +3,14 @@
 <form id="filterForm" method="post" action="{{ url_for('main.update_filters') }}">
 <div class="row border-bottom mb-2">
     <div class="col-lg-4">
-        <input class="form-control" type="search" name="" id="" placeholder="Free Text Search">
+        <input class="form-control" type="search" name="filter_search_value" id="filter_search_value" placeholder="Free Text Search" value="{{ filter_search_value }}">
     </div>
     <div class="col">
         <h1 class="mb-4" style="text-align: center;  font-size: xx-large;">People</h1>
     </div>
 </div>
 <div class="row">
+    {% if not filter_search_value %}
     <div class="col-lg-2">
         <h3>Filter by</h3>
         <div id="accordion">
@@ -323,13 +324,17 @@
             <!-- Repeat the above structure for other lists -->
         </div>
     </div>
+    {% endif %}
     <div class="col-lg-2">
         <div class="row border-bottom mb-2">
-            {% if criteria_options %}
+            {% if criteria_options or filter_search_value %}
                 <h3>Criteria</h3>
                 <a class="btn" href="{{ url_for('main.home') }}">Clear criteria</a>
             {% else %}
                 <h3>Criteria</h3>
+            {% endif %}
+            {% if filter_search_value %}
+            <p>Search: {{ filter_search_value }}</p>
             {% endif %}
             {% if filter_people_value %}
             <p>People: {{ filter_people_value[0] }}</p>
@@ -361,13 +366,14 @@
             
         </div>
         <div>
-            {% if criteria_options %}
+            {% if criteria_options or filter_search_value%}
             <h3>Results</h3>
             {% for case in filtered_cases %}
             <input class="form-control" type="text" value="{{ case.cases_people.standard_name }}" name="{{ case.id }}">
             {% endfor %}
+
             {% else %}
-            Chooze your criteria
+            Chooze your criteria or search text
             {% endif %}
 
         </div>
@@ -379,18 +385,22 @@
                 <h2>{{ case.cases_people.standard_name.split(',')[0] }}</h2>
                 <h3>{{ case.cases_people.standard_name.split(',')[1] }}</h3>
             </div>
+            {% if case.cases_people.wikidata %}
             <div class="col">
                 <h4>Wikidata:</h4>
                 <h3>{{ case.cases_people.wikidata }}</h3>
             </div>
+            {% endif %}
         </div>
         <div class="row">
             <div>
                 About: {{ case.cases_people.about }}
             </div>
+            {% if case.cases_people.recorded_names %}
             <div>
                 Recorded names: {{ case.cases_people.recorded_names }}
             </div>
+            {% endif %}
         </div>
         <div class="row border-bottom mb-2">
             <div>
@@ -403,8 +413,13 @@
                 Reference: {{ case.reference }}
             </div>
             <div>
+                Filters: ----
+            </div>
+            {% if case.notes %}
+            <div>
                 Notes: {{ case.notes }}
             </div>
+            {% endif %}
         </div>
         {% endfor %}
     </div>
@@ -416,17 +431,55 @@
 
 {% block scripts %}
 <script>
-    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    checkboxes.forEach(function(checkbox) {
-        checkbox.addEventListener('change', function () {
-            document.getElementById('filterForm').submit();
-        })
-    var radios = document.querySelectorAll('input[type="radio"]')
-    radios.forEach(function(radio) {
-        radio.addEventListener('change', function () {
-            document.getElementById('filterForm').submit();
-        })
-    })
-    })
+    // Postavi kursor na kraj stringa u input polju
+    function setCursorToEnd(el) {
+        el.focus();
+        if (typeof el.selectionStart == "number") {
+            el.selectionStart = el.selectionEnd = el.value.length;
+        } else if (typeof el.createTextRange != "undefined") {
+            el.focus();
+            var range = el.createTextRange();
+            range.collapse(false);
+            range.select();
+        }
+    }
+
+    let typingTimer;
+    const doneTypingInterval = 1000; // 1 sekunda
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const filterSearchInput = document.getElementById('filter_search_value');
+        
+        filterSearchInput.addEventListener('input', function() {
+            clearTimeout(typingTimer);
+            typingTimer = setTimeout(() => {
+                console.log('identifikovan input u search polje');
+                document.getElementById('filterForm').submit();
+            }, doneTypingInterval);
+        });
+
+        filterSearchInput.addEventListener('keydown', function() {
+            clearTimeout(typingTimer);
+        });
+
+        // Postavi kursor na kraj stringa u input polju prilikom učitavanja stranice
+        if (filterSearchInput.value.length > 0) {
+            setCursorToEnd(filterSearchInput);
+        }
+
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(function(checkbox) {
+            checkbox.addEventListener('change', function () {
+                document.getElementById('filterForm').submit();
+            })
+        });
+
+        var radios = document.querySelectorAll('input[type="radio"]');
+        radios.forEach(function(radio) {
+            radio.addEventListener('change', function () {
+                document.getElementById('filterForm').submit();
+            })
+        });
+    });
 </script>
 {% endblock %}

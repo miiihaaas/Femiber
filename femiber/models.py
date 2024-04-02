@@ -1,4 +1,6 @@
 from femiber import app, db
+from sqlalchemy.ext.hybrid import hybrid_property
+from unidecode import unidecode
 
 
 class People(db.Model):
@@ -27,7 +29,14 @@ class Cases(db.Model):
     excerpt = db.Column(db.Text)
     reference = db.Column(db.String(255))
     notes = db.Column(db.Text)
+    
+    # @hybrid_property
+    # def case_summary_unidecoded(self):
+    #     return unidecode(self.case_summary)
 
+    # @hybrid_property
+    # def consang_kinship_unidecoded(self):
+    #     return unidecode(self.consang_kinship)
 
 with app.app_context():
     db.create_all()

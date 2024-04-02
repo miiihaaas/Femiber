@@ -1,9 +1,10 @@
 import json
+from unidecode import unidecode
 from flask import Blueprint, jsonify, render_template_string
 from femiber.models import People, Cases
 from flask import render_template, redirect, url_for, flash, request
 from femiber import db
-from sqlalchemy import or_, and_, not_
+from sqlalchemy import or_, and_, not_, func
 from itertools import chain
 
 
@@ -117,7 +118,7 @@ def home():
                                 unique_passing_away_list=unique_passing_away_list)
     else:
         people = People.query.all()
-        
+        filter_search_value = ''
         #! Primer korišćenja funkcije za filtriranje - treba da se dobije iz HTML fajla selektovane vrednosti u obliku liste
         filter_people_value = []
         filter_consang_kinship_value = []  # Promenljiva vrednost filtera za consang_kinship
@@ -156,6 +157,7 @@ def home():
 
         return render_template('home.html',
                                 people=people,
+                                filter_search_value=filter_search_value,
                                 unique_kinships_list=unique_kinships_list,
                                 unique_religion_list=unique_religion_list,
                                 unique_religion_flag_list=unique_religion_flag_list,
@@ -171,6 +173,38 @@ def home():
 @main.route('/update_fiters', methods=["POST"])
 def update_filters():
     # get checked options
+    filter_search_value = unidecode(request.form.get('filter_search_value')).lower()
+    if len(filter_search_value) > 0:
+        print('ima pretrage')
+        filtered_cases = Cases.query.filter(or_(
+            func.lower((Cases.case_summary)).contains(unidecode(filter_search_value).lower()),
+            func.lower((Cases.consang_kinship)).contains(unidecode(filter_search_value).lower())
+        )).all()
+        return render_template('home.html',
+                        filter_search_value=filter_search_value,
+                        filtered_cases=filtered_cases,
+                        unique_kinships_list=None,
+                        unique_religion_list=None,
+                        unique_religion_flag_list=None,
+                        unique_traits_list=None,
+                        unique_partnership_list=None,
+                        unique_motherhood_list=None,
+                        unique_violence_list=None,
+                        unique_passing_away_list=None,
+                        
+                        filter_people_value=None,
+                        filter_consang_kinship_value=None,
+                        filter_religion_value=None,
+                        filter_religion_flag_value=None,
+                        filter_traits_value=None,
+                        filter_partnership_value=None,
+                        filter_motherhood_value=None,
+                        filter_physical_violence_value=None,
+                        filter_passing_away_value=None,
+                        
+                        criteria_options=None
+                        )
+        
     filter_people_value = request.form.getlist('people')
     filter_consang_kinship_value = request.form.getlist('kinship')
     filter_religion_value = request.form.getlist('religion')
@@ -180,6 +214,7 @@ def update_filters():
     filter_motherhood_value = request.form.getlist('motherhood')
     filter_physical_violence_value = request.form.getlist('violence')
     filter_passing_away_value = request.form.getlist('passing_away')
+    print(f'{filter_search_value=}')
     print(f'{filter_people_value=}')
     print(f'{filter_consang_kinship_value=}')
     print(f'{filter_religion_value=}')
@@ -207,6 +242,7 @@ def update_filters():
         criteria_options = False
     
     return render_template('home.html',
+                        filter_search_value=filter_search_value,
                         filtered_cases=filtered_cases,
                         unique_kinships_list=unique_kinships_list,
                         unique_religion_list=unique_religion_list,
