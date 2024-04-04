@@ -1,0 +1,8 @@
+.top-bar { background-color: #333333; color: #b1b1b1; padding: 10px 0; }
+.top-bar a { color: #c68e55; text-decoration: none; }
+.top-bar a:hover { color: #fe8f1e; }
+nav.navbar { background-color: #eee; }
+nav.navbar .navbar-collapse { flex-grow: unset; }
+nav.navbar .navbar-nav .nav-link { font-weight: 600; position: relative; }
+nav.navbar .navbar-nav .nav-link:after { content: ''; width: 50px; height: 3px; background-color: #c9c9c9; bottom: 0; display: flex; margin: 10px auto 0 auto; }
+nav.navbar .navbar-nav .nav-link.active:after, nav.navbar .navbar-nav .nav-link:hover:after { background-color: #809a3b; }
