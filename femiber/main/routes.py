@@ -170,7 +170,7 @@ def home():
                                 filtered_cases=filtered_cases)
 
 
-@main.route('/update_fiters', methods=["POST"])
+@main.route('/update_filters', methods=["POST"])
 def update_filters():
     # get checked options
     filter_search_value = unidecode(request.form.get('filter_search_value')).lower()
@@ -192,15 +192,15 @@ def update_filters():
                         unique_violence_list=None,
                         unique_passing_away_list=None,
                         
-                        filter_people_value=None,
-                        filter_consang_kinship_value=None,
-                        filter_religion_value=None,
-                        filter_religion_flag_value=None,
-                        filter_traits_value=None,
-                        filter_partnership_value=None,
-                        filter_motherhood_value=None,
-                        filter_physical_violence_value=None,
-                        filter_passing_away_value=None,
+                        filter_people_value=[],
+                        filter_consang_kinship_value=[],
+                        filter_religion_value=[],
+                        filter_religion_flag_value=[],
+                        filter_traits_value=[],
+                        filter_partnership_value=[],
+                        filter_motherhood_value=[],
+                        filter_physical_violence_value=[],
+                        filter_passing_away_value=[],
                         
                         criteria_options=None
                         )
