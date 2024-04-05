@@ -178,6 +178,15 @@ def update_filters():
         print('ima pretrage')
         filtered_cases = Cases.query.filter(or_(
             func.lower((Cases.case_summary)).contains(unidecode(filter_search_value).lower()),
+            func.lower((Cases.excerpt)).contains(unidecode(filter_search_value).lower()),
+            func.lower((Cases.consang_kinship)).contains(unidecode(filter_search_value).lower()),
+            func.lower((Cases.religion)).contains(unidecode(filter_search_value).lower()),
+            func.lower((Cases.religion_flag)).contains(unidecode(filter_search_value).lower()),
+            func.lower((Cases.traits)).contains(unidecode(filter_search_value).lower()),
+            func.lower((Cases.partnership)).contains(unidecode(filter_search_value).lower()),
+            func.lower((Cases.physical_violence)).contains(unidecode(filter_search_value).lower()),
+            func.lower((Cases.passing_away)).contains(unidecode(filter_search_value).lower()),
+            func.lower((Cases.notes)).contains(unidecode(filter_search_value).lower()),
             func.lower((Cases.consang_kinship)).contains(unidecode(filter_search_value).lower())
         )).all()
         return render_template('home.html',
