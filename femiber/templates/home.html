@@ -12,18 +12,18 @@
 </div>
 <div class="row">
     {% if not filter_search_value %}
-    <div class="col-lg-2">
+    <div class="col-lg-2 filter-box">
         <h3>Filter by</h3>
-        <div id="accordion">
+        <div id="accordion" class="filterby">
             <div class="card">
                 <div class="card-header" id="headingPeople">
                     <h5 class="mb-0">
-                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapsePeople" aria-expanded="true" aria-controls="collapsePeople">
-                            People
-                        </button>
+                        <span class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapsePeople" aria-expanded="true" aria-controls="collapsePeople">
+                            People <img src="../static/img/arrow-up.png" class="arrow">
+                        </span>
                     </h5>
                 </div>
-                <div id="collapsePeople" class="collapse show" aria-labelledby="headingPeople" data-parent="#accordion">
+                <div id="collapsePeople" class="collapse" aria-labelledby="headingPeople" data-parent="#accordion">
                     <div class="body-card">
                         <table class="table">
                             <tbody>
@@ -77,12 +77,12 @@
             <div class="card">
                 <div class="card-header" id="headingKinship">
                     <h5 class="mb-0">
-                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseKinship" aria-expanded="true" aria-controls="collapseKinship">
-                            Kinship
-                        </button>
+                        <span class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseKinship" aria-expanded="true" aria-controls="collapseKinship">
+                            Kinship <img src="../static/img/arrow-up.png" class="arrow">
+                        </span>
                     </h5>
                 </div>
-                <div id="collapseKinship" class="collapse show" aria-labelledby="headingKinship" data-parent="#accordion">
+                <div id="collapseKinship" class="collapse" aria-labelledby="headingKinship" data-parent="#accordion">
                     <div class="card-body">
                         <table class="table">
                             <tbody>
@@ -108,12 +108,12 @@
             <div class="card">
                 <div class="card-header" id="headingReligion">
                     <h5 class="mb-0">
-                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseReligion" aria-expanded="true" aria-controls="collapseReligion">
-                            Religion
-                        </button>
+                        <span class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseReligion" aria-expanded="true" aria-controls="collapseReligion">
+                            Religion <img src="../static/img/arrow-up.png" class="arrow">
+                        </span>
                     </h5>
                 </div>
-                <div id="collapseReligion" class="collapse show" aria-labelledby="headingReligion" data-parent="#accordion">
+                <div id="collapseReligion" class="collapse" aria-labelledby="headingReligion" data-parent="#accordion">
                     <div class="card-body">
                         <table class="table">
                             <tbody>
@@ -139,12 +139,12 @@
             <div class="card">
                 <div class="card-header" id="headingReligionFlag">
                     <h5 class="mb-0">
-                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseReligionFlag" aria-expanded="true" aria-controls="collapseReligionFlag">
-                            Religion Flag
-                        </button>
+                        <span class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseReligionFlag" aria-expanded="true" aria-controls="collapseReligionFlag">
+                            Religion Flag <img src="../static/img/arrow-up.png" class="arrow">
+                        </span>
                     </h5>
                 </div>
-                <div id="collapseReligionFlag" class="collapse show" aria-labelledby="headingReligionFlag" data-parent="#accordion">
+                <div id="collapseReligionFlag" class="collapse" aria-labelledby="headingReligionFlag" data-parent="#accordion">
                     <div class="card-body">
                         <table class="table">
                             <tbody>
@@ -170,12 +170,12 @@
             <div class="card">
                 <div class="card-header" id="headingTraits">
                     <h5 class="mb-0">
-                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseTraits" aria-expanded="true" aria-controls="collapseTraits">
-                            Traits
-                        </button>
+                        <span class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTraits" aria-expanded="true" aria-controls="collapseTraits">
+                            Traits <img src="../static/img/arrow-up.png" class="arrow">
+                        </span>
                     </h5>
                 </div>
-                <div id="collapseTraits" class="collapse show" aria-labelledby="headingTraits" data-parent="#accordion">
+                <div id="collapseTraits" class="collapse" aria-labelledby="headingTraits" data-parent="#accordion">
                     <div class="card-body">
                         <table class="table">
                             <tbody>
@@ -201,12 +201,12 @@
             <div class="card">
                 <div class="card-header" id="headingPartnership">
                     <h5 class="mb-0">
-                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapsePartnership" aria-expanded="true" aria-controls="collapsePartnership">
-                            Marital status (Partnership)
-                        </button>
+                        <span class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapsePartnership" aria-expanded="true" aria-controls="collapsePartnership">
+                            Marital status (Partnership) <img src="../static/img/arrow-up.png" class="arrow">
+                        </span>
                     </h5>
                 </div>
-                <div id="collapsePartnership" class="collapse show" aria-labelledby="headingPartnership" data-parent="#accordion">
+                <div id="collapsePartnership" class="collapse" aria-labelledby="headingPartnership" data-parent="#accordion">
                     <div class="card-body">
                         <table class="table">
                             <tbody>
@@ -232,12 +232,12 @@
             <div class="card">
                 <div class="card-header" id="headingMotherhood">
                     <h5 class="mb-0">
-                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseMotherhood" aria-expanded="true" aria-controls="collapseMotherhood">
-                            Motherhood
-                        </button>
+                        <span class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseMotherhood" aria-expanded="true" aria-controls="collapseMotherhood">
+                            Motherhood <img src="../static/img/arrow-up.png" class="arrow">
+                        </span>
                     </h5>
                 </div>
-                <div id="collapseMotherhood" class="collapse show" aria-labelledby="headingMotherhood" data-parent="#accordion">
+                <div id="collapseMotherhood" class="collapse" aria-labelledby="headingMotherhood" data-parent="#accordion">
                     <div class="card-body">
                         <table class="table">
                             <tbody>
@@ -263,12 +263,12 @@
             <div class="card">
                 <div class="card-header" id="headingViolence">
                     <h5 class="mb-0">
-                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseViolence" aria-expanded="true" aria-controls="collapseViolence">
-                            Violence & Transgression
-                        </button>
+                        <span class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseViolence" aria-expanded="true" aria-controls="collapseViolence">
+                            Violence & Transgression <img src="../static/img/arrow-up.png" class="arrow">
+                        </span>
                     </h5>
                 </div>
-                <div id="collapseViolence" class="collapse show" aria-labelledby="headingViolence" data-parent="#accordion">
+                <div id="collapseViolence" class="collapse" aria-labelledby="headingViolence" data-parent="#accordion">
                     <div class="card-body">
                         <table class="table">
                             <tbody>
@@ -294,12 +294,12 @@
             <div class="card">
                 <div class="card-header" id="headingPassingAway">
                     <h5 class="mb-0">
-                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapsePassingAway" aria-expanded="true" aria-controls="collapsePassingAway">
-                            Death
-                        </button>
+                        <span class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapsePassingAway" aria-expanded="true" aria-controls="collapsePassingAway">
+                            Death <img src="../static/img/arrow-up.png" class="arrow">
+                        </span>
                     </h5>
                 </div>
-                <div id="collapsePassingAway" class="collapse show" aria-labelledby="headingPassingAway" data-parent="#accordion">
+                <div id="collapsePassingAway" class="collapse" aria-labelledby="headingPassingAway" data-parent="#accordion">
                     <div class="card-body">
                         <table class="table">
                             <tbody>
