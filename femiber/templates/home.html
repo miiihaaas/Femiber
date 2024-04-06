@@ -370,7 +370,7 @@
             {% if criteria_options or filter_search_value%}
             <h3>Results</h3>
             {% for case in filtered_cases %}
-            <input class="form-control" type="text" value="{{ case.cases_people.standard_name }}" name="{{ case.id }}">
+            <input class="form-control case-input" type="text" value="{{ case.cases_people.standard_name }}" name="{{ case.id }}" data-case-id="{{ case.id }}">
             {% endfor %}
 
             {% else %}
@@ -381,166 +381,168 @@
     </div>
     <div class="col">
         {% for case in filtered_cases %}
-        <div class="row">
-            <div class="col-9">
-                <h2>{{ case.cases_people.standard_name.split(',')[0] }}</h2>
-                <h3>{{ case.cases_people.standard_name.split(',')[1] }}</h3>
-            </div>
-            {% if case.cases_people.wikidata %}
-            <div class="col">
-                <h4>Wikidata:</h4>
-                <h3>{{ case.cases_people.wikidata }}</h3>
-            </div>
-            {% endif %}
-        </div>
-        <div class="row">
-            <div>
-                About: {{ case.cases_people.about }}
-            </div>
-            {% if case.cases_people.recorded_names %}
-            <div>
-                Recorded names: {{ case.cases_people.recorded_names }}
-            </div>
-            {% endif %}
-        </div>
-        <div class="row border-bottom mb-2">
-            <div>
-                {{ case.case_summary }}
-            </div>
-            <div>
-                {{ case.excerpt }}
-            </div>
-            <div>
-                Reference: {{ case.reference }}
-            </div>
-            <div>
-                <h4>Filters: ---- Mihas dodao | gitTestNaIstojStrani  --- slobodno briši Miki ovaj h4</h4>
-                {% if case.consang_kinship and case.consang_kinship|length > 2 %}
-                <div>
-                    Kinship:
-                        {% set temp = case.consang_kinship.removeprefix("[").removesuffix("]") %}
-                        {% set temp = temp.split(", ") %}
-                        {% for item in temp %}
-                            {% set item = item.removeprefix('"').removesuffix('"') %}
-                            {% if item in filter_consang_kinship_value %}
-                                <strong>{{ item }}</strong>
-                            {% else %}
-                                {{ item }}
-                            {% endif %}
-                        {% endfor %}
+        <div id="case-{{ case.id }}" class="case-details">
+            <div class="row">
+                <div class="col-9">
+                    <h2>{{ case.cases_people.standard_name.split(',')[0] }}</h2>
+                    <h3>{{ case.cases_people.standard_name.split(',')[1] }}</h3>
                 </div>
-                {% endif %}
-                {% if case.religion and case.religion|length > 2%}
-                <div>
-                    Religion:
-                        {% set temp = case.religion.removeprefix("[").removesuffix("]") %}
-                        {% set temp = temp.split(", ") %}
-                        {% for item in temp %}
-                            {% set item = item.removeprefix('"').removesuffix('"') %}
-                            {% if item in filter_religion_value %}
-                                <strong>{{ item }}</strong>
-                            {% else %}
-                                {{ item }}
-                            {% endif %}
-                        {% endfor %}
-                </div>
-                {% endif %}
-                {% if case.religion_flag and case.religion_flag|length > 2 %}
-                <div>
-                    Religion flag:
-                        {% set temp = case.religion_flag.removeprefix("[").removesuffix("]") %}
-                        {% set temp = temp.split(", ") %}
-                        {% for item in temp %}
-                            {% set item = item.removeprefix('"').removesuffix('"') %}
-                            {% if item in filter_religion_flag_value %}
-                                <strong>{{ item }}</strong>
-                            {% else %}
-                                {{ item }}
-                            {% endif %}
-                        {% endfor %}
-                </div>
-                {% endif %}
-                {% if case.traits and case.traits|length > 2 %}
-                <div>
-                    Traits:
-                        {% set temp = case.traits.removeprefix("[").removesuffix("]") %}
-                        {% set temp = temp.split(", ") %}
-                        {% for item in temp %}
-                            {% set item = item.removeprefix('"').removesuffix('"') %}
-                            {% if item in filter_traits_value %}
-                                <strong>{{ item }}</strong>
-                            {% else %}
-                                {{ item }}
-                            {% endif %}
-                        {% endfor %}
-                </div>
-                {% endif %}
-                {% if case.partnership and case.partnership|length > 2 %}
-                <div>
-                    Partnership:
-                        {% set temp = case.partnership.removeprefix("[").removesuffix("]") %}
-                        {% set temp = temp.split(", ") %}
-                        {% for item in temp %}
-                            {% set item = item.removeprefix('"').removesuffix('"') %}
-                            {% if item in filter_partnership_value %}
-                                <strong>{{ item }}</strong>
-                            {% else %}
-                                {{ item }}
-                            {% endif %}
-                        {% endfor %}
-                </div>
-                {% endif %}
-                {% if case.motherhood and case.motherhood|length > 2 %}
-                <div>
-                    Motherhood:
-                        {% set temp = case.motherhood.removeprefix("[").removesuffix("]") %}
-                        {% set temp = temp.split(", ") %}
-                        {% for item in temp %}
-                            {% set item = item.removeprefix('"').removesuffix('"') %}
-                            {% if item in filter_motherhood_value %}
-                                <strong>{{ item }}</strong>
-                            {% else %}
-                                {{ item }}
-                            {% endif %}
-                        {% endfor %}
-                </div>
-                {% endif %}
-                {% if case.physical_violence and case.physical_violence|length > 2 %}
-                <div>
-                    Violence & Transgression:
-                        {% set temp = case.physical_violence.removeprefix("[").removesuffix("]") %}
-                        {% set temp = temp.split(", ") %}
-                        {% for item in temp %}
-                            {% set item = item.removeprefix('"').removesuffix('"') %}
-                            {% if item in filter_physical_violence_value %}
-                                <strong>{{ item }}</strong>
-                            {% else %}
-                                {{ item }}
-                            {% endif %}
-                        {% endfor %}
-                </div>
-                {% endif %}
-                {% if case.passing_away and case.passing_away|length > 2 %}
-                <div>
-                    Death:
-                        {% set temp = case.passing_away.removeprefix("[").removesuffix("]") %}
-                        {% set temp = temp.split(", ") %}
-                        {% for item in temp %}
-                            {% set item = item.removeprefix('"').removesuffix('"') %}
-                            {% if item in filter_passing_away_value %}
-                                <strong>{{ item }}</strong>
-                            {% else %}
-                                {{ item }}
-                            {% endif %}
-                        {% endfor %}
+                {% if case.cases_people.wikidata %}
+                <div class="col">
+                    <h4>Wikidata:</h4>
+                    <h3>{{ case.cases_people.wikidata }}</h3>
                 </div>
                 {% endif %}
             </div>
-            {% if case.notes %}
-            <div>
-                Notes: {{ case.notes }}
+            <div class="row">
+                <div>
+                    About: {{ case.cases_people.about }}
+                </div>
+                {% if case.cases_people.recorded_names %}
+                <div>
+                    Recorded names: {{ case.cases_people.recorded_names }}
+                </div>
+                {% endif %}
             </div>
-            {% endif %}
+            <div class="row border-bottom mb-2">
+                <div>
+                    {{ case.case_summary }}
+                </div>
+                <div>
+                    {{ case.excerpt }}
+                </div>
+                <div>
+                    Reference: {{ case.reference }}
+                </div>
+                <div>
+                    <h4>Filters: ---- Mihas dodao | gitTestNaIstojStrani  --- slobodno briši Miki ovaj h4</h4>
+                    {% if case.consang_kinship and case.consang_kinship|length > 2 %}
+                    <div>
+                        Kinship:
+                            {% set temp = case.consang_kinship.removeprefix("[").removesuffix("]") %}
+                            {% set temp = temp.split(", ") %}
+                            {% for item in temp %}
+                                {% set item = item.removeprefix('"').removesuffix('"') %}
+                                {% if item in filter_consang_kinship_value %}
+                                    <strong>{{ item }}</strong>
+                                {% else %}
+                                    {{ item }}
+                                {% endif %}
+                            {% endfor %}
+                    </div>
+                    {% endif %}
+                    {% if case.religion and case.religion|length > 2%}
+                    <div>
+                        Religion:
+                            {% set temp = case.religion.removeprefix("[").removesuffix("]") %}
+                            {% set temp = temp.split(", ") %}
+                            {% for item in temp %}
+                                {% set item = item.removeprefix('"').removesuffix('"') %}
+                                {% if item in filter_religion_value %}
+                                    <strong>{{ item }}</strong>
+                                {% else %}
+                                    {{ item }}
+                                {% endif %}
+                            {% endfor %}
+                    </div>
+                    {% endif %}
+                    {% if case.religion_flag and case.religion_flag|length > 2 %}
+                    <div>
+                        Religion flag:
+                            {% set temp = case.religion_flag.removeprefix("[").removesuffix("]") %}
+                            {% set temp = temp.split(", ") %}
+                            {% for item in temp %}
+                                {% set item = item.removeprefix('"').removesuffix('"') %}
+                                {% if item in filter_religion_flag_value %}
+                                    <strong>{{ item }}</strong>
+                                {% else %}
+                                    {{ item }}
+                                {% endif %}
+                            {% endfor %}
+                    </div>
+                    {% endif %}
+                    {% if case.traits and case.traits|length > 2 %}
+                    <div>
+                        Traits:
+                            {% set temp = case.traits.removeprefix("[").removesuffix("]") %}
+                            {% set temp = temp.split(", ") %}
+                            {% for item in temp %}
+                                {% set item = item.removeprefix('"').removesuffix('"') %}
+                                {% if item in filter_traits_value %}
+                                    <strong>{{ item }}</strong>
+                                {% else %}
+                                    {{ item }}
+                                {% endif %}
+                            {% endfor %}
+                    </div>
+                    {% endif %}
+                    {% if case.partnership and case.partnership|length > 2 %}
+                    <div>
+                        Partnership:
+                            {% set temp = case.partnership.removeprefix("[").removesuffix("]") %}
+                            {% set temp = temp.split(", ") %}
+                            {% for item in temp %}
+                                {% set item = item.removeprefix('"').removesuffix('"') %}
+                                {% if item in filter_partnership_value %}
+                                    <strong>{{ item }}</strong>
+                                {% else %}
+                                    {{ item }}
+                                {% endif %}
+                            {% endfor %}
+                    </div>
+                    {% endif %}
+                    {% if case.motherhood and case.motherhood|length > 2 %}
+                    <div>
+                        Motherhood:
+                            {% set temp = case.motherhood.removeprefix("[").removesuffix("]") %}
+                            {% set temp = temp.split(", ") %}
+                            {% for item in temp %}
+                                {% set item = item.removeprefix('"').removesuffix('"') %}
+                                {% if item in filter_motherhood_value %}
+                                    <strong>{{ item }}</strong>
+                                {% else %}
+                                    {{ item }}
+                                {% endif %}
+                            {% endfor %}
+                    </div>
+                    {% endif %}
+                    {% if case.physical_violence and case.physical_violence|length > 2 %}
+                    <div>
+                        Violence & Transgression:
+                            {% set temp = case.physical_violence.removeprefix("[").removesuffix("]") %}
+                            {% set temp = temp.split(", ") %}
+                            {% for item in temp %}
+                                {% set item = item.removeprefix('"').removesuffix('"') %}
+                                {% if item in filter_physical_violence_value %}
+                                    <strong>{{ item }}</strong>
+                                {% else %}
+                                    {{ item }}
+                                {% endif %}
+                            {% endfor %}
+                    </div>
+                    {% endif %}
+                    {% if case.passing_away and case.passing_away|length > 2 %}
+                    <div>
+                        Death:
+                            {% set temp = case.passing_away.removeprefix("[").removesuffix("]") %}
+                            {% set temp = temp.split(", ") %}
+                            {% for item in temp %}
+                                {% set item = item.removeprefix('"').removesuffix('"') %}
+                                {% if item in filter_passing_away_value %}
+                                    <strong>{{ item }}</strong>
+                                {% else %}
+                                    {{ item }}
+                                {% endif %}
+                            {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+                {% if case.notes %}
+                <div>
+                    Notes: {{ case.notes }}
+                </div>
+                {% endif %}
+            </div>
         </div>
         {% endfor %}
     </div>
@@ -600,6 +602,18 @@
             radio.addEventListener('change', function () {
                 document.getElementById('filterForm').submit();
             })
+        });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        $('.case-input').click(function() {
+            var caseId = $(this).data('case-id');
+            console.log("kliknut je input element: " + caseId);
+            $('.case-details').hide(); // sakrij sve detalje slučajeva
+
+            // prikaži samo detalje za odabrani slučaj
+            $('#case-' + caseId).show();
         });
     });
 </script>
