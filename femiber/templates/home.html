@@ -51,20 +51,29 @@
                                     <td>
                                         {% if filter_people_value[0] == "name" %}
                                         <input type="radio" id="people_name" name="people" value="name" checked>
+                                        {% elif filter_people_value and filter_people_value[0] in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' %}
+                                        <input type="radio" id="people_name" name="people" value="name" checked>
                                         {% else %}
                                         <input type="radio" id="people_name" name="people" value="name">
                                         {% endif %}
                                         <label for="people_name">Name</label>
                                     </td>
                                 </tr>
-                                {% if filter_people_value[0] == "name" %}
+                                {% if filter_people_value[0] == "name" or (filter_people_value and filter_people_value[0] in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ') %}
                                 <tr>
                                     <td>
-                                        <a href="" name="people">a</a>
-                                        <a href="" name="people">b</a>
-                                        <a href="" name="people">c</a>
-                                        <a href="" name="people">d</a>
-                                        <a href="" name="people">e</a>
+                                        {% for letter in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' %}
+                                            {% if letter not in unique_people_list %}
+                                                <input type="radio" id="people_{{ letter }}" name="people" value="{{ letter }}" disabled>
+                                            {% else %}
+                                                {% if letter in filter_people_value %}
+                                                    <input type="radio" id="people_{{ letter }}" name="people" value="{{ letter }}" checked>
+                                                {% else %}
+                                                    <input type="radio" id="people_{{ letter }}" name="people" value="{{ letter }}">
+                                                {% endif %}
+                                            {% endif %}
+                                        <label for="people_{{ letter }}">{{ letter }}</label>
+                                        {% endfor %}
                                     </td>
                                 </tr>
                                 {% endif %}
@@ -321,8 +330,6 @@
                 </div>
             </div>
             {% endif %}
-        
-            <!-- Repeat the above structure for other lists -->
         </div>
     </div>
     {% endif %}
@@ -370,7 +377,7 @@
             {% if criteria_options or filter_search_value%}
             <h3>Results</h3>
             {% for case in filtered_cases %}
-            <input class="form-control case-input" type="text" value="{{ case.cases_people.standard_name }}" name="{{ case.id }}" data-case-id="{{ case.id }}">
+            <span class="form-control case-input" data-case-id="{{ case.id }}">{{ case.cases_people.standard_name }}</span>
             {% endfor %}
 
             {% else %}

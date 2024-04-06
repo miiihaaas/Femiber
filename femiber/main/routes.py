@@ -31,7 +31,8 @@ def filter_cases(filter_people_value, filter_consang_kinship_value, filter_relig
             people_filters = Cases.cases_people.has(not_(People.people_filter.contains("groups")) & not_(People.people_filter.contains("individual")))
             filters.append(people_filters)
         else:
-            print('nije prošao individual')
+            people_filters = Cases.cases_people.has(People.people_filter==filter_people_value[0])
+            filters.append(people_filters)
 
     if filter_consang_kinship_value:
         consang_filters = [Cases.consang_kinship.contains(value) for value in filter_consang_kinship_value]
@@ -109,6 +110,7 @@ def home():
         print('END OF TESTING')
         
         return render_template('home.html',
+                                unique_people_list=unique_people_list,
                                 unique_kinships_list=unique_kinships_list,
                                 unique_religion_list=unique_religion_list,
                                 unique_religion_flag_list=unique_religion_flag_list,
@@ -134,7 +136,9 @@ def home():
         filtered_cases, unique_people_list, unique_kinships_list, unique_religion_list, unique_religion_flag_list, unique_traits_list, unique_partnership_list, unique_motherhood_list, unique_violence_list, unique_passing_away_list = filter_cases(filter_people_value, filter_consang_kinship_value, filter_religion_value, filter_religion_flag_value,
                                                                                                                                                                                                                 filter_traits_value, filter_partnership_value, filter_motherhood_value,
                                                                                                                                                                                                                 filter_physical_violence_value, filter_passing_away_value)
-
+        print(f'pre sortiranja > {[case.cases_people.standard_name for case in filtered_cases]}')
+        # sortiranje filtered_cases prema cases_people.standard_name
+        filtered_cases.sort(key=lambda x: x.cases_people.standard_name)
         # Možete iterirati kroz rezultate ili ih obraditi na drugi način
         print('-------------------------------------------------------------------------------------------------------------------------------')
         for case in filtered_cases:
@@ -242,6 +246,10 @@ def update_filters():
     filtered_cases, unique_people_list, unique_kinships_list, unique_religion_list, unique_religion_flag_list, unique_traits_list, unique_partnership_list, unique_motherhood_list, unique_violence_list, unique_passing_away_list = filter_cases(filter_people_value, filter_consang_kinship_value, filter_religion_value, filter_religion_flag_value,
                                                                                                                                                                                                 filter_traits_value, filter_partnership_value, filter_motherhood_value,
                                                                                                                                                                                                 filter_physical_violence_value, filter_passing_away_value)
+    
+    # sortiranje filtered_cases prema cases_people.standard_name
+    filtered_cases.sort(key=lambda x: x.cases_people.standard_name)
+    
     print('-------------------------------------------------------------------------------------------------------------------------------')
     for case in filtered_cases:
         print(case.id, case.consang_kinship, case.religion, case.religion_flag,
@@ -256,6 +264,7 @@ def update_filters():
         criteria_options = False
     
     return render_template('home.html',
+                        unique_people_list=unique_people_list,
                         filter_search_value=filter_search_value,
                         filtered_cases=filtered_cases,
                         unique_kinships_list=unique_kinships_list,
