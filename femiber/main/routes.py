@@ -5,6 +5,7 @@ from femiber.models import People, Cases
 from flask import render_template, redirect, url_for, flash, request
 from femiber import db
 from sqlalchemy import or_, and_, not_, func
+from sqlalchemy.orm import joinedload
 from itertools import chain
 
 
@@ -176,7 +177,7 @@ def update_filters():
     filter_search_value = unidecode(request.form.get('filter_search_value')).lower()
     if len(filter_search_value) > 0:
         print('ima pretrage')
-        filtered_cases = Cases.query.filter(or_(
+        filtered_cases = Cases.query.join(Cases.cases_people).filter(or_(
             func.lower((Cases.case_summary)).contains(unidecode(filter_search_value).lower()),
             func.lower((Cases.excerpt)).contains(unidecode(filter_search_value).lower()),
             func.lower((Cases.consang_kinship)).contains(unidecode(filter_search_value).lower()),
@@ -187,7 +188,11 @@ def update_filters():
             func.lower((Cases.physical_violence)).contains(unidecode(filter_search_value).lower()),
             func.lower((Cases.passing_away)).contains(unidecode(filter_search_value).lower()),
             func.lower((Cases.notes)).contains(unidecode(filter_search_value).lower()),
-            func.lower((Cases.consang_kinship)).contains(unidecode(filter_search_value).lower())
+            func.lower((Cases.consang_kinship)).contains(unidecode(filter_search_value).lower()),
+            func.lower((People.standard_name)).contains(unidecode(filter_search_value).lower()),
+            func.lower((People.wikidata)).contains(unidecode(filter_search_value).lower()),
+            func.lower((People.recorded_names)).contains(unidecode(filter_search_value).lower()),
+            func.lower((People.about)).contains(unidecode(filter_search_value).lower())
         )).all()
         return render_template('home.html',
                         filter_search_value=filter_search_value,
