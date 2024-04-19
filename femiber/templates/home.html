@@ -334,42 +334,42 @@
     </div>
     {% endif %}
     <div class="col-lg-2">
-        <div class="row border-bottom mb-2">
+        <div class="border-bottom mb-2 cccolor">
             {% if criteria_options or filter_search_value %}
                 <h3>Criteria</h3>
-                <a class="btn" href="{{ url_for('main.home') }}">Clear criteria</a>
+                <a class="diamond mb-3" href="{{ url_for('main.home') }}">Clear criteria</a>
             {% else %}
                 <h3>Criteria</h3>
             {% endif %}
             {% if filter_search_value %}
-            <p>Search: {{ filter_search_value }}</p>
+            <p><span class="criteriatitle">Search:</span> {{ filter_search_value }}</p>
             {% endif %}
             {% if filter_people_value %}
-            <p>People: {{ filter_people_value[0] }}</p>
+            <p><span class="criteriatitle">People:</span> <span class="criteriavalue">{{ filter_people_value[0] }}</span></p>
             {% endif %}
             {% if filter_consang_kinship_value %}
-            <p>Kindship: {% for item in filter_consang_kinship_value %}  {{ item }} | {% endfor %} </p>
+            <p><span class="criteriatitle">Kindship:</span> {% for item in filter_consang_kinship_value %}  <span class="criteriavalue">{{ item }}</span> | {% endfor %} </p>
             {% endif %}
             {% if filter_religion_value %}
-            <p>Religion: {% for item in filter_religion_value %}  {{ item }} | {% endfor %} </p>
+            <p><span class="criteriatitle">Religion:</span> {% for item in filter_religion_value %}  <span class="criteriavalue">{{ item }}</span> | {% endfor %} </p>
             {% endif %}
             {% if filter_religion_flag_value %}
-            <p>Religion flag: {% for item in filter_religion_flag_value %}  {{ item }} | {% endfor %} </p>
+            <p><span class="criteriatitle">Religion flag:</span> {% for item in filter_religion_flag_value %}  <span class="criteriavalue">{{ item }}</span> | {% endfor %} </p>
             {% endif %}
             {% if filter_traits_value %}
-            <p>Traits: {% for item in filter_traits_value %}  {{ item }} | {% endfor %} </p>
+            <p><span class="criteriatitle">Traits:</span> {% for item in filter_traits_value %}  <span class="criteriavalue">{{ item }}</span> | {% endfor %} </p>
             {% endif %}
             {% if filter_partnership_value %}
-            <p>Partnership: {% for item in filter_partnership_value %}  {{ item }} | {% endfor %} </p>
+            <p><span class="criteriatitle">Partnership:</span> {% for item in filter_partnership_value %}  <span class="criteriavalue">{{ item }}</span> | {% endfor %} </p>
             {% endif %}
             {% if filter_motherhood_value %}
-            <p>Motherhood: {% for item in filter_motherhood_value %}  {{ item }} | {% endfor %} </p>
+            <p><span class="criteriatitle">Motherhood:</span> {% for item in filter_motherhood_value %}  <span class="criteriavalue"{{ item }}</span> | {% endfor %} </p>
             {% endif %}
             {% if filter_physical_violence_value %}
-            <p>Violence & Transgression: {% for item in filter_physical_violence_value %}  {{ item }} | {% endfor %} </p>
+            <p><span class="criteriatitle">Violence & Transgression:</span> {% for item in filter_physical_violence_value %}  <span class="criteriavalue">{{ item }}</span> | {% endfor %} </p>
             {% endif %}
             {% if filter_passing_away_value %}
-            <p>Death: {% for item in filter_passing_away_value %}  {{ item }} | {% endfor %} </p>
+            <p><span class="criteriatitle">Death:</span> {% for item in filter_passing_away_value %}  <span class="criteriavalue">{{ item }}</span> | {% endfor %} </p>
             {% endif %}
             
         </div>
@@ -377,7 +377,7 @@
             {% if criteria_options or filter_search_value%}
             <h3>Results</h3>
             {% for case in filtered_cases %}
-            <span class="form-control case-input" data-case-id="{{ case.id }}">{{ case.cases_people.standard_name }}</span>
+            <span class="result-case" data-case-id="{{ case.id }}">{{ case.cases_people.standard_name }}</span>
             {% endfor %}
 
             {% else %}
@@ -624,4 +624,25 @@
         });
     });
 </script>
+
+<script>
+    // Pronađite sve input elemente u dokumentu
+    var inputs = document.querySelectorAll('input');
+
+    // Iterirajte kroz sve input elemente
+    inputs.forEach(function(input) {
+        // Dodajte događaj slušanja za promjene stanja
+        input.addEventListener('change', function() {
+            // Provjerite je li input čekiran
+            if (this.checked) {
+                // Ako je čekiran, dodajte klasu active-btn roditeljskom elementu span.btn
+                this.closest('.card').querySelector('.btn.btn-link.collapsed').classList.add('active-btn');
+            } else {
+                // Inače, uklonite klasu active-btn
+                this.closest('.card').querySelector('.btn.btn-link.collapsed').classList.add('active-btn');
+            }
+        });
+    });
+</script>
+
 {% endblock %}
