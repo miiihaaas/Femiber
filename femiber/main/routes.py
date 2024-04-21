@@ -182,8 +182,8 @@ def update_filters():
     if len(filter_search_value) > 0:
         print('ima pretrage')
         filtered_cases = Cases.query.join(Cases.cases_people).filter(or_(
-            func.lower((Cases.case_summary)).contains(unidecode(filter_search_value).lower()),
-            func.lower((Cases.excerpt)).contains(unidecode(filter_search_value).lower()),
+            func.lower((Cases.case_summary_unidecode)).contains(unidecode(filter_search_value).lower()), #!ove dve kolone trebada se prebace u nove dve kolone koje će imati unidecode karaktere i da se te dve nove kolone pretražuju umesto njih
+            func.lower((Cases.excerpt_unidecode)).contains(unidecode(filter_search_value).lower()), #!ove dve kolone trebada se prebace u nove dve kolone koje će imati unidecode karaktere i da se te dve nove kolone pretražuju umesto njih
             func.lower((Cases.consang_kinship)).contains(unidecode(filter_search_value).lower()),
             func.lower((Cases.religion)).contains(unidecode(filter_search_value).lower()),
             func.lower((Cases.religion_flag)).contains(unidecode(filter_search_value).lower()),
@@ -298,3 +298,13 @@ def contact():
 @main.route('/database_codebook')
 def database_codebook():
     return render_template('database_codebook.html')
+
+
+@main.route('/unidecode_test')
+def unidecode_test():
+    cases = Cases.query.all()
+    for case in cases:
+        case.case_summary_unidecode = unidecode(case.case_summary)
+        case.excerpt_unidecode = unidecode(case.excerpt)
+    db.session.commit()
+    return "Uspešno urađen test"
