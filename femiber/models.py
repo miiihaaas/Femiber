@@ -26,7 +26,9 @@ class Cases(db.Model):
     physical_violence = db.Column(db.String(255))
     passing_away = db.Column(db.String(255))
     case_summary = db.Column(db.Text)
+    case_summary_unidecode = db.Column(db.Text)
     excerpt = db.Column(db.Text)
+    excerpt_unidecode = db.Column(db.Text)
     reference = db.Column(db.String(255))
     notes = db.Column(db.Text)
     
