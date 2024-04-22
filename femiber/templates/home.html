@@ -377,7 +377,7 @@
             {% if criteria_options or filter_search_value%}
             <h3>Results</h3>
             {% for case in filtered_cases %}
-            <span class="result-case case-input" data-case-id="{{ case.id }}">{{ case.cases_people.standard_name }}</span>
+            <span class="result-case case-input" onclick="toggleExtraClass(this)" data-case-id="{{ case.id }}">{{ case.cases_people.standard_name }}</span>
             {% endfor %}
 
             {% else %}
@@ -680,6 +680,16 @@
 
         // Update the HTML content of the element
         element.innerHTML = text;
+    }
+</script>
+
+<script>
+    function toggleExtraClass(element) {
+        var spans = document.querySelectorAll('.result-case');
+        spans.forEach(function(span) {
+            span.classList.remove('clickedspan');
+        });
+        element.classList.add('clickedspan');
     }
 </script>
 
