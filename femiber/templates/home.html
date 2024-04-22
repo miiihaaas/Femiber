@@ -14,7 +14,7 @@
     {% if not filter_search_value %}
     <div class="col-lg-2 filter-box">
         <h3>Filter by</h3>
-        <div id="accordion" class="filterby">
+        <div id="accordion2" class="filterby">
             <div class="card">
                 <div class="card-header" id="headingPeople">
                     <h5 class="mb-0">
@@ -23,7 +23,7 @@
                         </span>
                     </h5>
                 </div>
-                <div id="collapsePeople" class="collapse" aria-labelledby="headingPeople" data-parent="#accordion">
+                <div id="collapsePeople" class="collapse" aria-labelledby="headingPeople">
                     <div class="body-card">
                         <table class="table">
                             <tbody>
@@ -91,7 +91,7 @@
                         </span>
                     </h5>
                 </div>
-                <div id="collapseKinship" class="collapse" aria-labelledby="headingKinship" data-parent="#accordion">
+                <div id="collapseKinship" class="collapse" aria-labelledby="headingKinship">
                     <div class="card-body">
                         <table class="table">
                             <tbody>
@@ -122,7 +122,7 @@
                         </span>
                     </h5>
                 </div>
-                <div id="collapseReligion" class="collapse" aria-labelledby="headingReligion" data-parent="#accordion">
+                <div id="collapseReligion" class="collapse" aria-labelledby="headingReligion">
                     <div class="card-body">
                         <table class="table">
                             <tbody>
@@ -153,7 +153,7 @@
                         </span>
                     </h5>
                 </div>
-                <div id="collapseReligionFlag" class="collapse" aria-labelledby="headingReligionFlag" data-parent="#accordion">
+                <div id="collapseReligionFlag" class="collapse" aria-labelledby="headingReligionFlag">
                     <div class="card-body">
                         <table class="table">
                             <tbody>
@@ -184,7 +184,7 @@
                         </span>
                     </h5>
                 </div>
-                <div id="collapseTraits" class="collapse" aria-labelledby="headingTraits" data-parent="#accordion">
+                <div id="collapseTraits" class="collapse" aria-labelledby="headingTraits">
                     <div class="card-body">
                         <table class="table">
                             <tbody>
@@ -215,7 +215,7 @@
                         </span>
                     </h5>
                 </div>
-                <div id="collapsePartnership" class="collapse" aria-labelledby="headingPartnership" data-parent="#accordion">
+                <div id="collapsePartnership" class="collapse" aria-labelledby="headingPartnership">
                     <div class="card-body">
                         <table class="table">
                             <tbody>
@@ -246,7 +246,7 @@
                         </span>
                     </h5>
                 </div>
-                <div id="collapseMotherhood" class="collapse" aria-labelledby="headingMotherhood" data-parent="#accordion">
+                <div id="collapseMotherhood" class="collapse" aria-labelledby="headingMotherhood">
                     <div class="card-body">
                         <table class="table">
                             <tbody>
@@ -277,7 +277,7 @@
                         </span>
                     </h5>
                 </div>
-                <div id="collapseViolence" class="collapse" aria-labelledby="headingViolence" data-parent="#accordion">
+                <div id="collapseViolence" class="collapse" aria-labelledby="headingViolence">
                     <div class="card-body">
                         <table class="table">
                             <tbody>
@@ -308,7 +308,7 @@
                         </span>
                     </h5>
                 </div>
-                <div id="collapsePassingAway" class="collapse" aria-labelledby="headingPassingAway" data-parent="#accordion">
+                <div id="collapsePassingAway" class="collapse" aria-labelledby="headingPassingAway">
                     <div class="card-body">
                         <table class="table">
                             <tbody>
@@ -632,23 +632,55 @@
 </script>
 
 <script>
-    // Pronađite sve input elemente u dokumentu
-    var inputs = document.querySelectorAll('input');
+    // Check local storage for checked checkboxes
+    $(document).ready(function() {
+      // Restore checked checkboxes
+      $("input[type='checkbox']").each(function() {
+        var checkboxId = $(this).attr('id');
+        var checked = localStorage.getItem(checkboxId);
+        if (checked !== null) {
+          $(this).prop('checked', checked === 'true');
+        }
+      });
+  
+      // Handle checkbox change event
+      $("input[type='checkbox']").change(function() {
+        var checkboxId = $(this).attr('id');
+        localStorage.setItem(checkboxId, $(this).prop('checked'));
+      });
+  
+      // Open the toggle box if any checkbox within it is checked
+      $(".collapse").each(function() {
+        var $collapse = $(this);
+        if ($collapse.find("input[type='checkbox']:checked").length > 0) {
+          $collapse.addClass("show");
+        }
+      });
+    });
+  </script>
+  <script>
+    // Get all elements with class 'xyz'
+    var elements = document.getElementsByClassName('xyz');
 
-    // Iterirajte kroz sve input elemente
-    inputs.forEach(function(input) {
-        // Dodajte događaj slušanja za promjene stanja
-        input.addEventListener('change', function() {
-            // Provjerite je li input čekiran
-            if (this.checked) {
-                // Ako je čekiran, dodajte klasu active-btn roditeljskom elementu span.btn
-                this.closest('.card').querySelector('.btn.btn-link.collapsed').classList.add('active-btn');
-            } else {
-                // Inače, uklonite klasu active-btn
-                this.closest('.card').querySelector('.btn.btn-link.collapsed').classList.add('active-btn');
+    // Iterate over each element
+    for (var i = 0; i < elements.length; i++) {
+        var element = elements[i];
+        var text = element.textContent;
+
+        // Get all classes of the current element
+        var classes = element.classList;
+
+        // Iterate over each class
+        classes.forEach(function(className) {
+            // Highlight specific words based on class name
+            if (className !== 'xyz') {
+                text = text.replace(new RegExp(className, 'g'), '<strong>' + className + '</strong>');
             }
         });
-    });
+
+        // Update the HTML content of the element
+        element.innerHTML = text;
+    }
 </script>
 
 {% endblock %}
