@@ -377,7 +377,7 @@
             {% if criteria_options or filter_search_value%}
             <h3>Results</h3>
             {% for case in filtered_cases %}
-            <span class="result-case" data-case-id="{{ case.id }}">{{ case.cases_people.standard_name }}</span>
+            <span class="result-case case-input" data-case-id="{{ case.id }}">{{ case.cases_people.standard_name }}</span>
             {% endfor %}
 
             {% else %}
@@ -404,25 +404,30 @@
             <div class="row">
                 <div>
                     About: {{ case.cases_people.about }}
+                    <hr>
                 </div>
                 {% if case.cases_people.recorded_names %}
                 <div>
                     Recorded names: {{ case.cases_people.recorded_names }}
+                    <hr>
+                    <hr>
                 </div>
                 {% endif %}
             </div>
             <div class="row border-bottom mb-2">
-                <div>
+                <div class="{{case.cases_people.standard_name.split(',')[0]}} xyz">
                     {{ case.case_summary }}
+                    <hr>
                 </div>
                 <div>
                     {{ case.excerpt }}
+                    <hr>
                 </div>
                 <div>
                     Reference: {{ case.reference }}
+                    <hr>
                 </div>
                 <div>
-                    <h4>Filters: ---- Mihas dodao | gitTestNaIstojStrani  --- slobodno briši Miki ovaj h4</h4>
                     {% if case.consang_kinship and case.consang_kinship|length > 2 %}
                     <div>
                         Kinship:
@@ -543,6 +548,7 @@
                             {% endfor %}
                     </div>
                     {% endif %}
+                    <hr>
                 </div>
                 {% if case.notes %}
                 <div>
