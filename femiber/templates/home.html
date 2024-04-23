@@ -337,7 +337,7 @@
         <div class="border-bottom mb-2 cccolor">
             {% if criteria_options or filter_search_value %}
                 <h3>Criteria</h3>
-                <a class="diamond mb-3" href="{{ url_for('main.home') }}">Clear criteria</a>
+                <a class="diamond mb-3" href="{{ url_for('main.home') }}" onclick="uncheckAll()">Clear criteria</a>
             {% else %}
                 <h3>Criteria</h3>
             {% endif %}
@@ -545,8 +545,8 @@
                     <hr>
                 </div>
                 {% if case.notes %}
-                <div>
-                    Notes: {{ case.notes }}
+                <div class="case-not">
+                    <strong>Notes:</strong> {{ case.notes }}
                 </div>
                 {% endif %}
             </div>
@@ -652,7 +652,7 @@
       });
     });
   </script>
-  <script>
+<script>
     // Get all elements with class 'xyz'
     var elements = document.getElementsByClassName('xyz');
 
@@ -663,14 +663,18 @@
 
         // Get all classes of the current element
         var classes = element.classList;
+        console.log('klase: ' + classes);
 
+        var stringToBold = ''
         // Iterate over each class
         classes.forEach(function(className) {
             // Highlight specific words based on class name
             if (className !== 'xyz') {
-                text = text.replace(new RegExp(className, 'g'), '<strong>' + className + '</strong>');
+                stringToBold += className + ' ';
             }
         });
+        stringToBold = stringToBold.trim();
+        text = text.replace(new RegExp(stringToBold, 'g'), '<strong>' + stringToBold + '</strong>');
 
         // Update the HTML content of the element
         element.innerHTML = text;
@@ -685,6 +689,14 @@
         });
         element.classList.add('clickedspan');
     }
+</script>
+<script>
+    function uncheckAll() {
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(function(checkbox) {
+        checkbox.checked = false;
+    });
+}
 </script>
 
 {% endblock %}
