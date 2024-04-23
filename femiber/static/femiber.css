@@ -39,6 +39,9 @@ nav.navbar .navbar-nav .nav-link.active:after, nav.navbar .navbar-nav .nav-link:
 .diamondsm:before { left: -3px; top: 5px; border-width: 7px 4px 7px 0; }
 .diamondsm:after { right: -3px; top: 5px; border-width: 7px 0 7px 4px; }
 .cccolor p { color:#ccc; }
+.stickycont { position: relative; }
+.filter-box { position: sticky; top: 10px; }
+.filter-box.fixed { position: fixed; bottom: 0; top: auto; }
 .case-details { text-align: justify; border-bottom: 1px solid #ddd; padding: 20px; }
 .case-details:nth-child(2n) { background-color: #f5f5f5; }
 .xyz { margin-bottom: 30px; }
