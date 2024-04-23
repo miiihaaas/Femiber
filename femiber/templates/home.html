@@ -389,7 +389,7 @@
     <div class="col">
         {% for case in filtered_cases %}
         <div id="case-{{ case.id }}" class="case-details">
-            <div class="row">
+            <div class="row mb-3">
                 <div class="col-9">
                     <h2>{{ case.cases_people.standard_name.split(',')[0] }}</h2>
                     <h3>{{ case.cases_people.standard_name.split(',')[1] }}</h3>
@@ -401,36 +401,30 @@
                 </div>
                 {% endif %}
             </div>
-            <div class="row">
+            <div class="row myborderbottom">
                 <div>
-                    About: {{ case.cases_people.about }}
-                    <hr>
+                    <strong>About:</strong> {{ case.cases_people.about }}
                 </div>
                 {% if case.cases_people.recorded_names %}
                 <div>
-                    Recorded names: {{ case.cases_people.recorded_names }}
-                    <hr>
-                    <hr>
+                    <strong>Recorded names:</strong> {{ case.cases_people.recorded_names }}
                 </div>
                 {% endif %}
             </div>
-            <div class="row border-bottom mb-2">
+            <div class="row mb-2">
                 <div class="{{case.cases_people.standard_name.split(',')[0]}} xyz">
                     {{ case.case_summary }}
-                    <hr>
                 </div>
-                <div>
+                <div class="case-exc">
                     {{ case.excerpt }}
-                    <hr>
                 </div>
-                <div>
+                <div class="case-ref myborderbottom pt-2">
                     Reference: {{ case.reference }}
-                    <hr>
                 </div>
-                <div>
+                <div class="case-cri">
                     {% if case.consang_kinship and case.consang_kinship|length > 2 %}
                     <div>
-                        Kinship:
+                        <span class="diamondsm">Consanguinity</span>
                             {% set temp = case.consang_kinship.removeprefix("[").removesuffix("]") %}
                             {% set temp = temp.split(", ") %}
                             {% for item in temp %}
@@ -445,7 +439,7 @@
                     {% endif %}
                     {% if case.religion and case.religion|length > 2%}
                     <div>
-                        Religion:
+                        <span class="diamondsm">Religion</span>
                             {% set temp = case.religion.removeprefix("[").removesuffix("]") %}
                             {% set temp = temp.split(", ") %}
                             {% for item in temp %}
@@ -460,7 +454,7 @@
                     {% endif %}
                     {% if case.religion_flag and case.religion_flag|length > 2 %}
                     <div>
-                        Religion flag:
+                        <span class="diamondsm">Religion flag</span>
                             {% set temp = case.religion_flag.removeprefix("[").removesuffix("]") %}
                             {% set temp = temp.split(", ") %}
                             {% for item in temp %}
@@ -475,7 +469,7 @@
                     {% endif %}
                     {% if case.traits and case.traits|length > 2 %}
                     <div>
-                        Traits:
+                        <span class="diamondsm">Traits</span>
                             {% set temp = case.traits.removeprefix("[").removesuffix("]") %}
                             {% set temp = temp.split(", ") %}
                             {% for item in temp %}
@@ -490,7 +484,7 @@
                     {% endif %}
                     {% if case.partnership and case.partnership|length > 2 %}
                     <div>
-                        Partnership:
+                        <span class="diamondsm">Partnership</span>
                             {% set temp = case.partnership.removeprefix("[").removesuffix("]") %}
                             {% set temp = temp.split(", ") %}
                             {% for item in temp %}
@@ -505,7 +499,7 @@
                     {% endif %}
                     {% if case.motherhood and case.motherhood|length > 2 %}
                     <div>
-                        Motherhood:
+                        <span class="diamondsm">Motherhood</span>
                             {% set temp = case.motherhood.removeprefix("[").removesuffix("]") %}
                             {% set temp = temp.split(", ") %}
                             {% for item in temp %}
@@ -520,7 +514,7 @@
                     {% endif %}
                     {% if case.physical_violence and case.physical_violence|length > 2 %}
                     <div>
-                        Violence & Transgression:
+                        <span class="diamondsm">Violence & Transgression</span>
                             {% set temp = case.physical_violence.removeprefix("[").removesuffix("]") %}
                             {% set temp = temp.split(", ") %}
                             {% for item in temp %}
@@ -535,7 +529,7 @@
                     {% endif %}
                     {% if case.passing_away and case.passing_away|length > 2 %}
                     <div>
-                        Death:
+                        <span class="diamondsm">Death</span>
                             {% set temp = case.passing_away.removeprefix("[").removesuffix("]") %}
                             {% set temp = temp.split(", ") %}
                             {% for item in temp %}
