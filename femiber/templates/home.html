@@ -60,7 +60,7 @@
                                     </td>
                                 </tr>
                                 {% if filter_people_value[0] == "name" or (filter_people_value and filter_people_value[0] in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ') %}
-                                <tr>
+                                <tr class="radio-buttons">
                                     <td>
                                         {% for letter in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' %}
                                             {% if letter not in unique_people_list %}
@@ -629,7 +629,7 @@
     // Check local storage for checked checkboxes
     $(document).ready(function() {
       // Restore checked checkboxes
-      $("input").each(function() {
+      $("input[type='checkbox']").each(function() {
         var checkboxId = $(this).attr('id');
         var checked = localStorage.getItem(checkboxId);
         if (checked !== null) {
@@ -638,7 +638,7 @@
       });
   
       // Handle checkbox change event
-      $("input").change(function() {
+      $("input[type='checkbox']").change(function() {
         var checkboxId = $(this).attr('id');
         localStorage.setItem(checkboxId, $(this).prop('checked'));
       });
@@ -646,7 +646,7 @@
       // Open the toggle box if any checkbox within it is checked
       $(".collapse").each(function() {
         var $collapse = $(this);
-        if ($collapse.find("input:checked").length > 0) {
+        if ($collapse.find("input[type='checkbox']:checked").length > 0) {
           $collapse.addClass("show");
         }
       });
@@ -698,6 +698,15 @@
         var checkboxId = checkbox.getAttribute('id');
         localStorage.removeItem(checkboxId);
     });
+}
+</script>
+<script>
+$(document).ready(function() {
+  $('input:radio:disabled').each(function() {
+    var labelFor = $(this).attr('id');
+    $('label[for="' + labelFor + '"]').addClass('disabled-radio');
+  });
+});
 }
 </script>
 
