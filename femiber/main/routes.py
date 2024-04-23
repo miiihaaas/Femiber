@@ -90,24 +90,26 @@ def home():
         filter_motherhood_value = request.form.getlist('motherhood')
         filter_physical_violence_value = request.form.getlist('violence')
         filter_passing_away_value = request.form.getlist('passing_away')
-        print(f'{filter_consang_kinship_value=}')
-        print(f'{filter_religion_value=}')
-        print(f'{filter_religion_flag_value=}')
-        print(f'{filter_traits_value=}')
-        print(f'{filter_partnership_value=}')
-        print(f'{filter_motherhood_value=}')
+        # print(f'{filter_consang_kinship_value=}')
+        # print(f'{filter_religion_value=}')
+        # print(f'{filter_religion_flag_value=}')
+        # print(f'{filter_traits_value=}')
+        # print(f'{filter_partnership_value=}')
+        # print(f'{filter_motherhood_value=}')
 
         filtered_cases, unique_people_list, unique_kinships_list, unique_religion_list, unique_religion_flag_list, unique_traits_list, unique_partnership_list, unique_motherhood_list, unique_violence_list, unique_passing_away_list = filter_cases(filter_consang_kinship_value, filter_religion_value, filter_religion_flag_value,
                                                                                                                                                                                                         filter_traits_value, filter_partnership_value, filter_motherhood_value,
                                                                                                                                                                                                         filter_physical_violence_value, filter_passing_away_value)
         # Možete iterirati kroz rezultate ili ih obraditi na drugi način
-        print('-------------------------------------------------------------------------------------------------------------------------------')
-        for case in filtered_cases:
-            print(case.id, case.consang_kinship, case.religion, case.religion_flag,
-                case.traits, case.partnership, case.motherhood, case.physical_violence, case.passing_away)
-        print('-------------------------------------------------------------------------------------------------------------------------------')
-        print(f'home|post > {unique_people_list=}')
-        print('END OF TESTING')
+        # print('-------------------------------------------------------------------------------------------------------------------------------')
+        # for case in filtered_cases:
+        #     print(case.id, case.consang_kinship, case.religion, case.religion_flag,
+        #         case.traits, case.partnership, case.motherhood, case.physical_violence, case.passing_away)
+        # print('-------------------------------------------------------------------------------------------------------------------------------')
+        # print(f'home|post > {unique_people_list=}')
+        # print('END OF TESTING')
+        
+        print(f'{filtered_cases=}')
         
         return render_template('home.html',
                                 unique_people_list=unique_people_list,
@@ -136,17 +138,17 @@ def home():
         filtered_cases, unique_people_list, unique_kinships_list, unique_religion_list, unique_religion_flag_list, unique_traits_list, unique_partnership_list, unique_motherhood_list, unique_violence_list, unique_passing_away_list = filter_cases(filter_people_value, filter_consang_kinship_value, filter_religion_value, filter_religion_flag_value,
                                                                                                                                                                                                                 filter_traits_value, filter_partnership_value, filter_motherhood_value,
                                                                                                                                                                                                                 filter_physical_violence_value, filter_passing_away_value)
-        print(f'pre sortiranja > {[case.cases_people.standard_name for case in filtered_cases]}')
-        # sortiranje filtered_cases prema cases_people.standard_name
-        filtered_cases.sort(key=lambda x: x.cases_people.standard_name)
-        # Možete iterirati kroz rezultate ili ih obraditi na drugi način
-        print('-------------------------------------------------------------------------------------------------------------------------------')
-        for case in filtered_cases:
-            print(case.id, case.consang_kinship, case.religion, case.religion_flag,
-                case.traits, case.partnership, case.motherhood, case.physical_violence, case.passing_away)
-        print('-------------------------------------------------------------------------------------------------------------------------------')
-        print(f'home|else > {unique_people_list=}')
-        print('END OF TESTING')
+        # print(f'pre sortiranja > {[case.cases_people.standard_name for case in filtered_cases]}')
+        # # sortiranje filtered_cases prema cases_people.standard_name
+        # filtered_cases.sort(key=lambda x: x.cases_people.standard_name)
+        # # Možete iterirati kroz rezultate ili ih obraditi na drugi način
+        # print('-------------------------------------------------------------------------------------------------------------------------------')
+        # for case in filtered_cases:
+        #     print(case.id, case.consang_kinship, case.religion, case.religion_flag,
+        #         case.traits, case.partnership, case.motherhood, case.physical_violence, case.passing_away)
+        # print('-------------------------------------------------------------------------------------------------------------------------------')
+        # print(f'home|else > {unique_people_list=}')
+        # print('END OF TESTING')
         
         
         #! Ovo su sve moguće vrednosti filtera koje se učitavaju na početku
@@ -159,7 +161,7 @@ def home():
         # unique_violence_list = ['assult', 'murder', 'captivity', 'mouring', 'rape']
         # unique_passing_away_list = ['death', 'funeral', 'resting place', 'translation']
 
-
+        print(f'{filtered_cases=}')
         return render_template('home.html',
                                 people=people,
                                 filter_search_value=filter_search_value,
@@ -232,16 +234,16 @@ def update_filters():
     filter_motherhood_value = request.form.getlist('motherhood')
     filter_physical_violence_value = request.form.getlist('violence')
     filter_passing_away_value = request.form.getlist('passing_away')
-    print(f'{filter_search_value=}')
-    print(f'{filter_people_value=}')
-    print(f'{filter_consang_kinship_value=}')
-    print(f'{filter_religion_value=}')
-    print(f'{filter_religion_flag_value=}')
-    print(f'{filter_traits_value=}')
-    print(f'{filter_partnership_value=}')
-    print(f'{filter_motherhood_value=}')
-    print(f'{filter_physical_violence_value=}')
-    print(f'{filter_passing_away_value=}')
+    # print(f'{filter_search_value=}')
+    # print(f'{filter_people_value=}')
+    # print(f'{filter_consang_kinship_value=}')
+    # print(f'{filter_religion_value=}')
+    # print(f'{filter_religion_flag_value=}')
+    # print(f'{filter_traits_value=}')
+    # print(f'{filter_partnership_value=}')
+    # print(f'{filter_motherhood_value=}')
+    # print(f'{filter_physical_violence_value=}')
+    # print(f'{filter_passing_away_value=}')
     
     filtered_cases, unique_people_list, unique_kinships_list, unique_religion_list, unique_religion_flag_list, unique_traits_list, unique_partnership_list, unique_motherhood_list, unique_violence_list, unique_passing_away_list = filter_cases(filter_people_value, filter_consang_kinship_value, filter_religion_value, filter_religion_flag_value,
                                                                                                                                                                                                 filter_traits_value, filter_partnership_value, filter_motherhood_value,
@@ -250,19 +252,19 @@ def update_filters():
     # sortiranje filtered_cases prema cases_people.standard_name
     filtered_cases.sort(key=lambda x: x.cases_people.standard_name)
     
-    print('-------------------------------------------------------------------------------------------------------------------------------')
-    for case in filtered_cases:
-        print(case.id, case.consang_kinship, case.religion, case.religion_flag,
-            case.traits, case.partnership, case.motherhood, case.physical_violence, case.passing_away)
-    print('-------------------------------------------------------------------------------------------------------------------------------')
-    print(f'update_filters > {unique_people_list=}')
-    print('END OF TESTING')
+    # print('-------------------------------------------------------------------------------------------------------------------------------')
+    # for case in filtered_cases:
+    #     print(case.id, case.consang_kinship, case.religion, case.religion_flag,
+    #         case.traits, case.partnership, case.motherhood, case.physical_violence, case.passing_away)
+    # print('-------------------------------------------------------------------------------------------------------------------------------')
+    # print(f'update_filters > {unique_people_list=}')
+    # print('END OF TESTING')
     
     if any(filter_people_value + filter_consang_kinship_value + filter_religion_value + filter_religion_flag_value + filter_traits_value + filter_partnership_value + filter_motherhood_value + filter_physical_violence_value + filter_passing_away_value):
         criteria_options = True
     else:
         criteria_options = False
-    
+    print(f'{filtered_cases=}')
     return render_template('home.html',
                         unique_people_list=unique_people_list,
                         filter_search_value=filter_search_value,
