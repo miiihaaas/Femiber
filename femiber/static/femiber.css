@@ -55,3 +55,4 @@ span.result-case:hover { color: #809a3b; }
 .case-exc { font-style: italic; padding-left: 40px; }
 .case-cri { display: flex; flex-wrap: wrap; gap: 10px 20px; }
 .case-cri-title { font-weight: bold; color: #6b8131; }
+.case-not { margin: 20px 0 0 0; }
