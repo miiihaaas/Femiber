@@ -27,8 +27,8 @@ nav.navbar .navbar-nav .nav-link.active:after, nav.navbar .navbar-nav .nav-link:
 .filterby label { margin-bottom: 0; }
 .filterby table td { border: 0; padding: 0 10px; }
 .filterby .card-body { padding: 0; }
-.diamond { margin-left: 10px; line-height: 34px; position: relative; display: block; background-color: #809a3b; width: fit-content; color: #fff; }
-.diamond { text-decoration: none; text-transform: uppercase;border-radius: 10px; padding: 0 30px; transition: background-color 0.3s ease; }
+.diamond { margin-left: 6px; line-height: 34px; position: relative; display: block; background-color: #809a3b; width: auto; color: #fff; }
+.diamond { text-decoration: none; text-transform: uppercase;border-radius: 10px; padding: 0 20px; transition: background-color 0.3s ease; text-align: center; }
 .diamond:hover { background-color: #6b8131; color: #fff; text-decoration: none; }
 .diamond:before, .diamond:after { content: ''; position: absolute; height: 0; width: 0; border-style: solid; border-width: 0; border-color: transparent #809a3b; transition: border-color 0.3s ease; }
 .diamond:before { left: -5px; top: 5px; border-width: 12px 6px 12px 0; }
@@ -40,7 +40,6 @@ nav.navbar .navbar-nav .nav-link.active:after, nav.navbar .navbar-nav .nav-link:
 .diamondsm:after { right: -3px; top: 5px; border-width: 7px 0 7px 4px; }
 .cccolor p { color:#ccc; }
 .stickycont { position: relative; }
-.filter-box { position: sticky; top: 10px; }
 .filter-box.fixed { position: fixed; bottom: 0; top: auto; }
 .case-details { text-align: justify; border-bottom: 1px solid #ddd; padding: 20px; }
 .case-details:nth-child(2n) { background-color: #f5f5f5; }
@@ -56,3 +55,7 @@ span.result-case:hover { color: #809a3b; }
 .case-cri { display: flex; flex-wrap: wrap; gap: 10px 20px; }
 .case-cri-title { font-weight: bold; color: #6b8131; }
 .case-not { margin: 20px 0 0 0; }
+
+@media (min-width: 992px) {
+    .filter-box { position: sticky; top: 10px; }
+}
