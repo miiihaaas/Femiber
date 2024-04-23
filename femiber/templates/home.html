@@ -629,7 +629,7 @@
     // Check local storage for checked checkboxes
     $(document).ready(function() {
       // Restore checked checkboxes
-      $("input[type='checkbox']").each(function() {
+      $("input").each(function() {
         var checkboxId = $(this).attr('id');
         var checked = localStorage.getItem(checkboxId);
         if (checked !== null) {
@@ -638,7 +638,7 @@
       });
   
       // Handle checkbox change event
-      $("input[type='checkbox']").change(function() {
+      $("input").change(function() {
         var checkboxId = $(this).attr('id');
         localStorage.setItem(checkboxId, $(this).prop('checked'));
       });
@@ -646,7 +646,7 @@
       // Open the toggle box if any checkbox within it is checked
       $(".collapse").each(function() {
         var $collapse = $(this);
-        if ($collapse.find("input[type='checkbox']:checked").length > 0) {
+        if ($collapse.find("input:checked").length > 0) {
           $collapse.addClass("show");
         }
       });
@@ -695,6 +695,8 @@
     var checkboxes = document.querySelectorAll('input[type="checkbox"]');
     checkboxes.forEach(function(checkbox) {
         checkbox.checked = false;
+        var checkboxId = checkbox.getAttribute('id');
+        localStorage.removeItem(checkboxId);
     });
 }
 </script>
