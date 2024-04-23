@@ -377,7 +377,7 @@
             {% if criteria_options or filter_search_value%}
             <h3>Results</h3>
             {% for case in filtered_cases %}
-            <span class="result-case case-input" onclick="toggleExtraClass(this)" data-case-id="{{ case.id }}">{{ case.cases_people.standard_name }}</span>
+            <span class="result-case case-input" onclick="toggleExtraClass(this)" data-case-id="{{ case.id }}" data-people-id="{{ case.cases_people.id }}">{{ case.cases_people.standard_name }}</span>
             {% endfor %}
 
             {% else %}
@@ -554,12 +554,25 @@
         {% endfor %}
     </div>
 </div>
+<a href="#" class="to-top">
+    <i class="fas fa-chevron-up"></i>
+</a>
 </form>
 
 
 {% endblock content%}
 
 {% block scripts %}
+<script>
+    const toTop = document.querySelector(".to-top");
+    window.addEventListener("scroll", () => {
+        if (window.pageYOffset > 400) {
+            toTop.classList.add("active");
+        } else {
+            toTop.classList.remove("active");
+        }
+    })
+</script>
 <script>
     // Postavi kursor na kraj stringa u input polju
     function setCursorToEnd(el) {
@@ -628,30 +641,30 @@
 <script>
     // Check local storage for checked checkboxes
     $(document).ready(function() {
-      // Restore checked checkboxes
-      $("input").each(function() {
-        var checkboxId = $(this).attr('id');
-        var checked = localStorage.getItem(checkboxId);
-        if (checked !== null) {
-          $(this).prop('checked', checked === 'true');
-        }
-      });
-  
-      // Handle checkbox change event
-      $("input").change(function() {
-        var checkboxId = $(this).attr('id');
-        localStorage.setItem(checkboxId, $(this).prop('checked'));
-      });
-  
-      // Open the toggle box if any checkbox within it is checked
-      $(".collapse").each(function() {
-        var $collapse = $(this);
-        if ($collapse.find("input:checked").length > 0) {
-          $collapse.addClass("show");
-        }
-      });
+        // Restore checked checkboxes
+        $("input[type='checkbox']").each(function() {
+            var checkboxId = $(this).attr('id');
+            var checked = localStorage.getItem(checkboxId);
+            if (checked !== null) {
+                $(this).prop('checked', checked === 'true');
+            }
+        });
+
+        // Handle checkbox change event
+        $("input[type='checkbox']").change(function() {
+            var checkboxId = $(this).attr('id');
+            localStorage.setItem(checkboxId, $(this).prop('checked'));
+        });
+
+        // Open the toggle box if any checkbox within it is checked
+        $(".collapse").each(function() {
+            var $collapse = $(this);
+            if ($collapse.find("input:checked").length > 0) {
+                $collapse.addClass("show");
+            }
+        });
     });
-  </script>
+</script>
 <script>
     // Get all elements with class 'xyz'
     var elements = document.getElementsByClassName('xyz');

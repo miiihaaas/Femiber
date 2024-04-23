@@ -1,3 +1,6 @@
+.to-top { position: fixed; bottom: 20px; right: 20px; width: 40px; height: 40px; background-color: #a34d4c; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; text-decoration: none; opacity: 0; pointer-events: none; transition: all 0.4s;}
+.to-top.active { bottom: 20px;pointer-events: auto; opacity: 1; text-decoration: none;}
+.to-top:hover { text-decoration: none; color: #fff; }
 .top-bar { background-color: #333333; color: #b1b1b1; padding: 10px 0; }
 .top-bar a { color: #c68e55; text-decoration: none; }
 .top-bar a:hover { color: #fe8f1e; }
