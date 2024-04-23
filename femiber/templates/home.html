@@ -10,11 +10,11 @@
         <h1 class="mb-4" style="text-align: center;  font-size: xx-large;">People</h1>
     </div>
 </div>
-<div class="row">
+<div class="row stickycont">
     {% if not filter_search_value %}
     <div class="col-lg-2 filter-box">
         <h3>Filter by</h3>
-        <div id="accordion" class="filterby">
+        <div id="accordion2" class="filterby">
             <div class="card">
                 <div class="card-header" id="headingPeople">
                     <h5 class="mb-0">
@@ -23,7 +23,7 @@
                         </span>
                     </h5>
                 </div>
-                <div id="collapsePeople" class="collapse" aria-labelledby="headingPeople" data-parent="#accordion">
+                <div id="collapsePeople" class="collapse" aria-labelledby="headingPeople">
                     <div class="body-card">
                         <table class="table">
                             <tbody>
@@ -91,7 +91,7 @@
                         </span>
                     </h5>
                 </div>
-                <div id="collapseKinship" class="collapse" aria-labelledby="headingKinship" data-parent="#accordion">
+                <div id="collapseKinship" class="collapse" aria-labelledby="headingKinship">
                     <div class="card-body">
                         <table class="table">
                             <tbody>
@@ -122,7 +122,7 @@
                         </span>
                     </h5>
                 </div>
-                <div id="collapseReligion" class="collapse" aria-labelledby="headingReligion" data-parent="#accordion">
+                <div id="collapseReligion" class="collapse" aria-labelledby="headingReligion">
                     <div class="card-body">
                         <table class="table">
                             <tbody>
@@ -153,7 +153,7 @@
                         </span>
                     </h5>
                 </div>
-                <div id="collapseReligionFlag" class="collapse" aria-labelledby="headingReligionFlag" data-parent="#accordion">
+                <div id="collapseReligionFlag" class="collapse" aria-labelledby="headingReligionFlag">
                     <div class="card-body">
                         <table class="table">
                             <tbody>
@@ -184,7 +184,7 @@
                         </span>
                     </h5>
                 </div>
-                <div id="collapseTraits" class="collapse" aria-labelledby="headingTraits" data-parent="#accordion">
+                <div id="collapseTraits" class="collapse" aria-labelledby="headingTraits">
                     <div class="card-body">
                         <table class="table">
                             <tbody>
@@ -215,7 +215,7 @@
                         </span>
                     </h5>
                 </div>
-                <div id="collapsePartnership" class="collapse" aria-labelledby="headingPartnership" data-parent="#accordion">
+                <div id="collapsePartnership" class="collapse" aria-labelledby="headingPartnership">
                     <div class="card-body">
                         <table class="table">
                             <tbody>
@@ -246,7 +246,7 @@
                         </span>
                     </h5>
                 </div>
-                <div id="collapseMotherhood" class="collapse" aria-labelledby="headingMotherhood" data-parent="#accordion">
+                <div id="collapseMotherhood" class="collapse" aria-labelledby="headingMotherhood">
                     <div class="card-body">
                         <table class="table">
                             <tbody>
@@ -277,7 +277,7 @@
                         </span>
                     </h5>
                 </div>
-                <div id="collapseViolence" class="collapse" aria-labelledby="headingViolence" data-parent="#accordion">
+                <div id="collapseViolence" class="collapse" aria-labelledby="headingViolence">
                     <div class="card-body">
                         <table class="table">
                             <tbody>
@@ -308,7 +308,7 @@
                         </span>
                     </h5>
                 </div>
-                <div id="collapsePassingAway" class="collapse" aria-labelledby="headingPassingAway" data-parent="#accordion">
+                <div id="collapsePassingAway" class="collapse" aria-labelledby="headingPassingAway">
                     <div class="card-body">
                         <table class="table">
                             <tbody>
@@ -377,7 +377,7 @@
             {% if criteria_options or filter_search_value%}
             <h3>Results</h3>
             {% for case in filtered_cases %}
-            <span class="result-case case-input" data-case-id="{{ case.id }}">{{ case.cases_people.standard_name }}</span>
+            <span class="result-case case-input" onclick="toggleExtraClass(this)" data-case-id="{{ case.id }}">{{ case.cases_people.standard_name }}</span>
             {% endfor %}
 
             {% else %}
@@ -389,7 +389,7 @@
     <div class="col">
         {% for case in filtered_cases %}
         <div id="case-{{ case.id }}" class="case-details">
-            <div class="row">
+            <div class="row mb-3">
                 <div class="col-9">
                     <h2>{{ case.cases_people.standard_name.split(',')[0] }}</h2>
                     <h3>{{ case.cases_people.standard_name.split(',')[1] }}</h3>
@@ -401,36 +401,30 @@
                 </div>
                 {% endif %}
             </div>
-            <div class="row">
+            <div class="row myborderbottom">
                 <div>
-                    About: {{ case.cases_people.about }}
-                    <hr>
+                    <strong>About:</strong> {{ case.cases_people.about }}
                 </div>
                 {% if case.cases_people.recorded_names %}
                 <div>
-                    Recorded names: {{ case.cases_people.recorded_names }}
-                    <hr>
-                    <hr>
+                    <strong>Recorded names:</strong> {{ case.cases_people.recorded_names }}
                 </div>
                 {% endif %}
             </div>
-            <div class="row border-bottom mb-2">
+            <div class="row mb-2">
                 <div class="{{case.cases_people.standard_name.split(',')[0]}} xyz">
                     {{ case.case_summary }}
-                    <hr>
                 </div>
-                <div>
+                <div class="case-exc">
                     {{ case.excerpt }}
-                    <hr>
                 </div>
-                <div>
+                <div class="case-ref myborderbottom pt-2">
                     Reference: {{ case.reference }}
-                    <hr>
                 </div>
-                <div>
+                <div class="case-cri">
                     {% if case.consang_kinship and case.consang_kinship|length > 2 %}
                     <div>
-                        Kinship:
+                        <span class="diamondsm">Consanguinity</span>
                             {% set temp = case.consang_kinship.removeprefix("[").removesuffix("]") %}
                             {% set temp = temp.split(", ") %}
                             {% for item in temp %}
@@ -445,7 +439,7 @@
                     {% endif %}
                     {% if case.religion and case.religion|length > 2%}
                     <div>
-                        Religion:
+                        <span class="diamondsm">Religion</span>
                             {% set temp = case.religion.removeprefix("[").removesuffix("]") %}
                             {% set temp = temp.split(", ") %}
                             {% for item in temp %}
@@ -460,7 +454,7 @@
                     {% endif %}
                     {% if case.religion_flag and case.religion_flag|length > 2 %}
                     <div>
-                        Religion flag:
+                        <span class="diamondsm">Religion flag</span>
                             {% set temp = case.religion_flag.removeprefix("[").removesuffix("]") %}
                             {% set temp = temp.split(", ") %}
                             {% for item in temp %}
@@ -475,7 +469,7 @@
                     {% endif %}
                     {% if case.traits and case.traits|length > 2 %}
                     <div>
-                        Traits:
+                        <span class="diamondsm">Traits</span>
                             {% set temp = case.traits.removeprefix("[").removesuffix("]") %}
                             {% set temp = temp.split(", ") %}
                             {% for item in temp %}
@@ -490,7 +484,7 @@
                     {% endif %}
                     {% if case.partnership and case.partnership|length > 2 %}
                     <div>
-                        Partnership:
+                        <span class="diamondsm">Partnership</span>
                             {% set temp = case.partnership.removeprefix("[").removesuffix("]") %}
                             {% set temp = temp.split(", ") %}
                             {% for item in temp %}
@@ -505,7 +499,7 @@
                     {% endif %}
                     {% if case.motherhood and case.motherhood|length > 2 %}
                     <div>
-                        Motherhood:
+                        <span class="diamondsm">Motherhood</span>
                             {% set temp = case.motherhood.removeprefix("[").removesuffix("]") %}
                             {% set temp = temp.split(", ") %}
                             {% for item in temp %}
@@ -520,7 +514,7 @@
                     {% endif %}
                     {% if case.physical_violence and case.physical_violence|length > 2 %}
                     <div>
-                        Violence & Transgression:
+                        <span class="diamondsm">Violence & Transgression</span>
                             {% set temp = case.physical_violence.removeprefix("[").removesuffix("]") %}
                             {% set temp = temp.split(", ") %}
                             {% for item in temp %}
@@ -535,7 +529,7 @@
                     {% endif %}
                     {% if case.passing_away and case.passing_away|length > 2 %}
                     <div>
-                        Death:
+                        <span class="diamondsm">Death</span>
                             {% set temp = case.passing_away.removeprefix("[").removesuffix("]") %}
                             {% set temp = temp.split(", ") %}
                             {% for item in temp %}
@@ -632,23 +626,65 @@
 </script>
 
 <script>
-    // Pronađite sve input elemente u dokumentu
-    var inputs = document.querySelectorAll('input');
+    // Check local storage for checked checkboxes
+    $(document).ready(function() {
+      // Restore checked checkboxes
+      $("input[type='checkbox']").each(function() {
+        var checkboxId = $(this).attr('id');
+        var checked = localStorage.getItem(checkboxId);
+        if (checked !== null) {
+          $(this).prop('checked', checked === 'true');
+        }
+      });
+  
+      // Handle checkbox change event
+      $("input[type='checkbox']").change(function() {
+        var checkboxId = $(this).attr('id');
+        localStorage.setItem(checkboxId, $(this).prop('checked'));
+      });
+  
+      // Open the toggle box if any checkbox within it is checked
+      $(".collapse").each(function() {
+        var $collapse = $(this);
+        if ($collapse.find("input[type='checkbox']:checked").length > 0) {
+          $collapse.addClass("show");
+        }
+      });
+    });
+  </script>
+  <script>
+    // Get all elements with class 'xyz'
+    var elements = document.getElementsByClassName('xyz');
 
-    // Iterirajte kroz sve input elemente
-    inputs.forEach(function(input) {
-        // Dodajte događaj slušanja za promjene stanja
-        input.addEventListener('change', function() {
-            // Provjerite je li input čekiran
-            if (this.checked) {
-                // Ako je čekiran, dodajte klasu active-btn roditeljskom elementu span.btn
-                this.closest('.card').querySelector('.btn.btn-link.collapsed').classList.add('active-btn');
-            } else {
-                // Inače, uklonite klasu active-btn
-                this.closest('.card').querySelector('.btn.btn-link.collapsed').classList.add('active-btn');
+    // Iterate over each element
+    for (var i = 0; i < elements.length; i++) {
+        var element = elements[i];
+        var text = element.textContent;
+
+        // Get all classes of the current element
+        var classes = element.classList;
+
+        // Iterate over each class
+        classes.forEach(function(className) {
+            // Highlight specific words based on class name
+            if (className !== 'xyz') {
+                text = text.replace(new RegExp(className, 'g'), '<strong>' + className + '</strong>');
             }
         });
-    });
+
+        // Update the HTML content of the element
+        element.innerHTML = text;
+    }
+</script>
+
+<script>
+    function toggleExtraClass(element) {
+        var spans = document.querySelectorAll('.result-case');
+        spans.forEach(function(span) {
+            span.classList.remove('clickedspan');
+        });
+        element.classList.add('clickedspan');
+    }
 </script>
 
 {% endblock %}
