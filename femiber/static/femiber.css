@@ -1,4 +1,6 @@
 .pad-0 { padding: 0 !important; }
+a { color: #9d0000; text-decoration: none; }
+a:hover { color: #9d0000; }
 .top-bar { background-color: #333333; color: #b1b1b1; padding: 10px 0; }
 .top-bar a { color: #c68e55; text-decoration: none; }
 .top-bar a:hover { color: #fe8f1e; }
