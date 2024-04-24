@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="page-title">
+    <div class="container">
+        <h1>About the project</h1>
+        <p>
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo 
+            inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, 
+            sed quia consequuntur magni dolores.
+        </p>
+    </div>
+</div>
+
+<div class="wrapper d-flex align-items-stretch">
+    <main role="main" class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <legend class="">{{ legend }}</legend>
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                {% endif %}
+                {% endwith %}
+                <p>
+                    he website is licensed under a <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC license</a>, and it is hosted and maintained 
+                    by the University Pompeu Fabra, Barcelona.
+                </p>
+                <p>
+                    Please cite the database records using the following convention: Blašković, Marija. “Standard Name.” <em>FEMIber CrCast.</em> 2024. 
+                    Accessed DD.MM.YYYY. <a href="https://www.femiber.upf.edu/">https://www.femiber.upf.edu</a>
+                </p>
+                <p>
+                    The project “FEMIber,” carried out by Marija Blašković, has received funding from the European Union’s Horizon 2020 research and innovation program under 
+                    the Marie Skłodowska-Curie grant agreement No 101064789.
+                </p>
+                <p>The images used on this site are:
+                    <ul>
+                        <li>Detail from the <em>Crónica de Castilla</em>, Ms. Espagnol 12, fol. 11r°, Bibliothèque nationale de France.</li>
+                        <li>Detail from the <em>Catalan Atlas</em>, Ms. Espagnol 30, panel 6, fol. 5vº, Bibliothèque nationale de France.</li>
+                    </ul>
+                </p>
+                <p>Text excerpts are from the Crónica de Castilla, ed. Patricia Rochwert-Zuili, Paris: e-Spania Books, 2010; DOI: 
+                    <a href="https://books.openedition.org/esb/63">https://doi.org/10.4000/books.esb.63</a>
+                </p>
+            </div>
+        </div>
+    </main>
+
+</div>
+
+{% endblock content%}
+{% block scripts %}
+{% endblock %}

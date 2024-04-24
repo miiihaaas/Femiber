@@ -77,9 +77,9 @@ def filter_cases(filter_people_value, filter_consang_kinship_value, filter_relig
     return filtered_cases, unique_people_list, unique_kinships_list, unique_religion_list, unique_religion_flag_list, unique_traits_list, unique_partnership_list, unique_motherhood_list, unique_violence_list, unique_passing_away_list
 
 
-@main.route("/", methods=['GET', 'POST'])
-@main.route("/home", methods=['GET', 'POST'])
-def home():
+
+@main.route("/database_search", methods=['GET', 'POST'])
+def database_search():
     if request.method == "POST":
         # get checked options
         filter_consang_kinship_value = request.form.getlist('kinship')
@@ -111,7 +111,7 @@ def home():
         
         print(f'{filtered_cases=}')
         
-        return render_template('home.html',
+        return render_template('database_search.html',
                                 unique_people_list=unique_people_list,
                                 unique_kinships_list=unique_kinships_list,
                                 unique_religion_list=unique_religion_list,
@@ -162,7 +162,7 @@ def home():
         # unique_passing_away_list = ['death', 'funeral', 'resting place', 'translation']
 
         print(f'{filtered_cases=}')
-        return render_template('home.html',
+        return render_template('database_search.html',
                                 people=people,
                                 filter_search_value=filter_search_value,
                                 unique_kinships_list=unique_kinships_list,
@@ -200,7 +200,7 @@ def update_filters():
             func.lower((People.recorded_names)).contains(unidecode(filter_search_value).lower()),
             func.lower((People.about)).contains(unidecode(filter_search_value).lower())
         )).all()
-        return render_template('home.html',
+        return render_template('database_search.html',
                         filter_search_value=filter_search_value,
                         filtered_cases=filtered_cases,
                         unique_kinships_list=None,
@@ -265,7 +265,7 @@ def update_filters():
     else:
         criteria_options = False
     print(f'{filtered_cases=}')
-    return render_template('home.html',
+    return render_template('database_search.html',
                         unique_people_list=unique_people_list,
                         filter_search_value=filter_search_value,
                         filtered_cases=filtered_cases,
@@ -291,10 +291,17 @@ def update_filters():
                         criteria_options=criteria_options
                         )
 
-
+@main.route("/", methods=['GET', 'POST'])
+@main.route('/home')
+def home():
+    return render_template('home.html')
 @main.route('/contact')
 def contact():
     return render_template('contact.html')
+
+@main.route('/about')
+def about():
+    return render_template('about.html')
 
 
 @main.route('/database_codebook')
