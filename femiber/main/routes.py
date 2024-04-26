@@ -162,6 +162,9 @@ def database_search():
         # unique_passing_away_list = ['death', 'funeral', 'resting place', 'translation']
 
         print(f'{filtered_cases=}')
+        people_results = list(set([People.query.get(case.person_id) for case in filtered_cases]))
+        people_results.sort(key=lambda x: x.standard_name)
+        nuber_of_people = len(People.query.all())
         return render_template('database_search.html',
                                 people=people,
                                 filter_search_value=filter_search_value,
@@ -174,7 +177,9 @@ def database_search():
                                 unique_violence_list=unique_violence_list,
                                 unique_passing_away_list=unique_passing_away_list,
                                 filter_people_value=None, #! da nema preselektovanu opciju people
-                                filtered_cases=filtered_cases)
+                                filtered_cases=filtered_cases,
+                                people_results=people_results,
+                                nuber_of_people=nuber_of_people)
 
 
 @main.route('/update_filters', methods=["POST"])
@@ -200,6 +205,10 @@ def update_filters():
             func.lower((People.recorded_names)).contains(unidecode(filter_search_value).lower()),
             func.lower((People.about)).contains(unidecode(filter_search_value).lower())
         )).all()
+        
+        people_results = list(set([People.query.get(case.person_id) for case in filtered_cases]))
+        people_results.sort(key=lambda x: x.standard_name)
+        nuber_of_people = len(People.query.all())
         return render_template('database_search.html',
                         filter_search_value=filter_search_value,
                         filtered_cases=filtered_cases,
@@ -222,7 +231,9 @@ def update_filters():
                         filter_physical_violence_value=[],
                         filter_passing_away_value=[],
                         
-                        criteria_options=None
+                        criteria_options=None,
+                        people_results=people_results,
+                        nuber_of_people=nuber_of_people
                         )
         
     filter_people_value = request.form.getlist('people')
@@ -265,6 +276,9 @@ def update_filters():
     else:
         criteria_options = False
     print(f'{filtered_cases=}')
+    people_results = list(set([People.query.get(case.person_id) for case in filtered_cases]))
+    people_results.sort(key=lambda x: x.standard_name)
+    nuber_of_people = len(People.query.all())
     return render_template('database_search.html',
                         unique_people_list=unique_people_list,
                         filter_search_value=filter_search_value,
@@ -288,7 +302,9 @@ def update_filters():
                         filter_physical_violence_value=filter_physical_violence_value,
                         filter_passing_away_value=filter_passing_away_value,
                         
-                        criteria_options=criteria_options
+                        criteria_options=criteria_options,
+                        people_results=people_results,
+                        nuber_of_people=nuber_of_people
                         )
 
 @main.route("/", methods=['GET', 'POST'])

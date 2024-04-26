@@ -23,7 +23,7 @@
         <input class="form-control" type="search" name="filter_search_value" id="filter_search_value" placeholder="Free Text Search" value="{{ filter_search_value }}">
     </div>
     <div class="col">
-        <h1 class="mb-4" style="text-align: center;  font-size: xx-large;">People</h1>
+        <!-- <h1 class="mb-4" style="text-align: center;  font-size: xx-large;">People</h1> -->
     </div>
 </div>
 <div class="row stickycont">
@@ -416,11 +416,14 @@
             
         </div>
         <div>
-            {% if criteria_options or filter_search_value%}
-            <h3>Results</h3>
-            {% for case in filtered_cases %}
-            <span class="result-case case-input" onclick="toggleExtraClass(this)" data-case-id="{{ case.id }}" data-people-id="{{ case.cases_people.id }}">{{ case.cases_people.standard_name }}</span>
+            {% if criteria_options or filter_search_value %}
+            <h3>Results ({{ people_results|length }}/{{ nuber_of_people }})</h3>
+            {% for people in people_results %}
+            <span class="result-case people-input" onclick="toggleExtraClass(this)" data-people-id="{{ people.id }}">{{ people.standard_name }}</span>
             {% endfor %}
+            <!-- {% for case in filtered_cases %}
+            <span class="result-case case-input" onclick="toggleExtraClass(this)" data-case-id="{{ case.id }}" data-people-id="{{ case.cases_people.id }}">{{ case.cases_people.standard_name }}</span>
+            {% endfor %} -->
 
             {% else %}
             Chooze your criteria or search text
@@ -428,31 +431,39 @@
 
         </div>
     </div>
-    <div class="col">
-        {% for case in filtered_cases %}
-        <div id="case-{{ case.id }}" class="case-details">
+    <div class="col" id="no-results">
+        <img src="../static/img/femiber-logo.jpg" class="">
+    </div>
+    {% if criteria_options or filter_search_value %}
+    <div class="col" id="search-results">
+        {% for people in people_results %}
+        <div id="people-{{ people.id }}-id" class="people-details">
             <div class="row mb-3">
                 <div class="col-9">
-                    <h2>{{ case.cases_people.standard_name.split(',')[0] }}</h2>
-                    <h3>{{ case.cases_people.standard_name.split(',')[1] }}</h3>
+                    <h2>{{ people.standard_name.split(',')[0] }}</h2>
+                    <h3>{{ people.standard_name.split(',')[1] }}</h3>
                 </div>
-                {% if case.cases_people.wikidata %}
+                {% if people.wikidata %}
                 <div class="col">
                     <h4>Wikidata:</h4>
-                    <h3>{{ case.cases_people.wikidata }}</h3>
+                    <h3>{{ people.wikidata }}</h3>
                 </div>
                 {% endif %}
             </div>
-            <div class="row myborderbottom">
+            <div class="row myborderbottom"> 
                 <div>
-                    <strong>About:</strong> {{ case.cases_people.about }}
+                    {{ people.about }}
                 </div>
-                {% if case.cases_people.recorded_names %}
+                {% if people.recorded_names %}
                 <div>
-                    <strong>Recorded names:</strong> {{ case.cases_people.recorded_names }}
+                    <strong>Recorded names:</strong> {{ people.recorded_names }}
                 </div>
                 {% endif %}
             </div>
+        </div>
+        {% endfor %}
+        {% for case in filtered_cases %}
+        <div id="people-{{ case.person_id }}-id" class="case-details">
             <div class="row mb-2">
                 <div class="{{case.cases_people.standard_name.split(',')[0]}} xyz">
                     {{ case.case_summary }}
@@ -595,6 +606,7 @@
         </div>
         {% endfor %}
     </div>
+    {% endif %}
 </div>
 <a href="#" class="to-top diamond">
     <i class="fas fa-chevron-up"></i>
@@ -672,7 +684,7 @@
         });
     });
 </script>
-<script>
+<!-- <script>
     $(document).ready(function() {
         $('.case-input').click(function() {
             var caseId = $(this).data('case-id');
@@ -681,6 +693,26 @@
 
             // prikaži samo detalje za odabrani slučaj
             $('#case-' + caseId).show();
+        });
+    });
+</script> -->
+<script>
+    $(document).ready(function() {
+        $('#search-results').hide();
+    })
+    $(document).ready(function() {
+        $('.people-input').click(function() {
+            var peopleId = $(this).data('people-id');
+            console.log("kliknut je input element: " + peopleId);
+            $('.case-details').hide(); // sakrij sve detalje slučajeva
+            $('.people-details').hide(); // sakrij sve detalje slučajeva
+
+            // prikaži samo detalje za odabrani slučaj
+            // $('#people-' + peopleId + '-id').show(); // prikaži samo element sa tačnim id-om
+
+            $('[id^=people-' + peopleId + '-id]').show();
+            $('#search-results').show();
+            $('#no-results').hide();
         });
     });
 </script>
