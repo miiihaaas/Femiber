@@ -63,14 +63,30 @@ def filter_cases(filter_people_value, filter_consang_kinship_value, filter_relig
     query = query.filter(and_(*filters))
     unique_people_list = list(set([record.cases_people.people_filter for record in query.all()]))
 
-    unique_kinships_list = list(set([string for record in query.all() for string in json.loads(record.consang_kinship)]))
-    unique_religion_list = list(set([string for record in query.all() for string in json.loads(record.religion)]))
-    unique_religion_flag_list = list(set([string for record in query.all() for string in json.loads(record.religion_flag)]))
+    unique_kinships_list_ = list(set([string for record in query.all() for string in json.loads(record.consang_kinship)]))
+    unique_religion_list_ = list(set([string for record in query.all() for string in json.loads(record.religion)]))
+    unique_religion_flag_list_ = list(set([string for record in query.all() for string in json.loads(record.religion_flag)]))
     unique_traits_list = list(set([string for record in query.all() for string in json.loads(record.traits)]))
-    unique_partnership_list = list(set([string for record in query.all() for string in json.loads(record.partnership)]))
-    unique_motherhood_list = list(set([string for record in query.all() for string in json.loads(record.motherhood)]))
-    unique_violence_list = list(set([string for record in query.all() for string in json.loads(record.physical_violence)]))
-    unique_passing_away_list = list(set([string for record in query.all() for string in json.loads(record.passing_away)]))
+    unique_partnership_list_ = list(set([string for record in query.all() for string in json.loads(record.partnership)]))
+    unique_motherhood_list_ = list(set([string for record in query.all() for string in json.loads(record.motherhood)]))
+    unique_violence_list_ = list(set([string for record in query.all() for string in json.loads(record.physical_violence)]))
+    unique_passing_away_list_ = list(set([string for record in query.all() for string in json.loads(record.passing_away)]))
+    
+    
+    order_kinship = ["mother", "father", "sister(s)", "brother(s)", "other(s)", "none"]
+    order_religion = ["Christian", "Muslim", "Jewish", "uncertain"]
+    order_religion_flag = ["explicit", "implicit", "action/attitude", "saint", "probably", "lacking information"]
+    order_partnership = ["none", "liaison", "marriage arrangement", "marriage", "unclear"]
+    order_motherhood = ["no children", "pregnancy", "children", "unclear"]
+    order_violence = ["assault", "captivity", "rape", "murder", "mourning"]
+    order_passing_away = ["death", "funeral", "resting place", "translation"]
+    unique_kinships_list = [kinship for kinship in order_kinship if kinship in unique_kinships_list_]
+    unique_religion_list = [religion for religion in order_religion if religion in unique_religion_list_]
+    unique_religion_flag_list = [religion_flag for religion_flag in order_religion_flag if religion_flag in unique_religion_flag_list_]
+    unique_partnership_list = [partnership for partnership in order_partnership if partnership in unique_partnership_list_]
+    unique_motherhood_list = [motherhood for motherhood in order_motherhood if motherhood in unique_motherhood_list_]
+    unique_violence_list = [violence for violence in order_violence if violence in unique_violence_list_]
+    unique_passing_away_list = [passing_away for passing_away in order_passing_away if passing_away in unique_passing_away_list_]
 
     filtered_cases = query.all()
     
