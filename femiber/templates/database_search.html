@@ -432,7 +432,7 @@
         </div>
     </div>
     <div class="col" id="no-results">
-        <img src="../static/img/femiber-logo.jpg" class="">
+        <img src="../static/img/banner-4-2.jpg" class="d-flex mx-auto" style="max-height: 50vh;">
     </div>
     {% if criteria_options or filter_search_value %}
     <div class="col" id="search-results">
@@ -444,9 +444,8 @@
                     <h3>{{ people.standard_name.split(',')[1] }}</h3>
                 </div>
                 {% if people.wikidata %}
-                <div class="col">
-                    <h4>Wikidata:</h4>
-                    <h3>{{ people.wikidata }}</h3>
+                <div class="col d-flex justify-content-end">
+                    <em>Wikidata: {{ people.wikidata }}</em>
                 </div>
                 {% endif %}
             </div>
