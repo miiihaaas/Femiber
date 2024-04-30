@@ -336,9 +336,9 @@ def about():
     return render_template('about.html')
 
 
-@main.route('/database_codebook')
-def database_codebook():
-    return render_template('database_codebook.html')
+@main.route('/database_guide')
+def database_guide():
+    return render_template('database_guide.html')
 
 
 @main.route('/unidecode_test')

@@ -1,0 +1,135 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="page-title">
+    <div class="container">
+        <h1>Database Guide</h1>
+        <!--<p>
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo 
+            inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, 
+            sed quia consequuntur magni dolores.
+        </p>-->
+    </div>
+</div>
+
+<div class="wrapper d-flex align-items-stretch">
+    <main role="main" class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p>
+                    This is an abbreviated guide to <em>FEMIber CrCast</em>, a relational database generated within the project
+                    “Digitizing Women of Medieval Iberian Historiography” (also known as “FEMIber”), conducted by
+                    Marija Blašković at the Department of Humanities, University Pompeu Fabra in Barcelona, Spain. The
+                    database’s source material is the anonymous <a href="https://es.wikipedia.org/wiki/Cr%C3%B3nica_de_Castilla" target="_blank"><em>Crónica de Castilla</em></a> (ca. 1300, Castile-León), edited by
+                    <a href="https://books.openedition.org/esb/63" target="_blank">Patricia Rochwert-Zuili</a> in 2010.
+                </p>
+                <p>
+                    This project has received funding from the European Union’s Horizon 2020 research and innovation
+                    program under the Marie Skłodowska-Curie grant agreement No 101064789. The database design was
+                    influenced by the codebooks and protocols employed in the <a href="https://medievallondoners.ace.fordham.edu/search/" target="_blank"><em>Medieval Londoners Database</em></a> and the
+                    </a><em>Prosopography of Anglo-Saxon England (<a href="https://pase.ac.uk/" target="_blank">PASE</a>)</em>.
+                </p>
+                <p>
+                    Users can either select criteria from the filter panel or use the free-text search option to explore the
+                    database, which contains the following fields and values:
+                </p>
+                <table class="criteria-explanation mt-5 mb-5">
+                    <tr>
+                        <th style="border-right: 1px solid #fff;">Field</th>
+                        <th>Values</th>
+                    </tr>
+                    <tr>
+                        <td>Standard Name</td>
+                        <td>
+                            The woman’s name is given in standardized Spanish (e.g., Isabel instead of Elisabeth; Juana instead of Joan), followed by a descriptor such as “wife of” or “daughter of” in the case of individuals or an expression that highlights ties to other people and/or places in the case of groups.<br>
+                            When the same individual was recorded with different names throughout history, the database uses the one deemed most recognizable. If women are not mentioned in earlier historiography, the name in the <em>Crónica de Castilla</em> is their <u>Standard Name</u>; if the work’s manuscripts contain different names, these will be alphabetized and hyphenated. Arabic numbers are assigned in order of entry to women with the same forename and anonymous individuals/groups to disambiguate them.<br>
+                            Regarding the names of peninsular kings and noblemen who function as descriptors, they appear in their Spanish form. Regnal numbers and the names of the territories they ruled are used to ensure proper identification. For Muslim rulers, a shorter form of their Arabic names is used. Men of foreign origin who lived on the Iberian Peninsula will be listed under their Hispanicized names (Enrique instead of Henry, Ramón instead of Raymond). If men who did not live on the Iberian Peninsula are mentioned, their names will be Anglicized (e.g., William of Ponthieu, Raymond of Savoy).
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Wikidata</td>
+                        <td>External, unique identifier of an identified person as used by the <a href="https://www.wikidata.org/wiki/Wikidata:Main_Page" target="_blanc">Wikidata</a> base. Only shown if available.</td>
+                    </tr>
+                    <tr>
+                        <td>About</td>
+                        <td>Brief, corpus-external information that contains names (in different languages) and places, or, in case of undocumented women, an explanation of their mention in the chronicle.</td>
+                    </tr>
+                    <tr>
+                        <td>Recorded Names</td>
+                        <td>Names/name variants and, if available, patronymics as they appear in the <em>Crónica de Castilla</em>, together with the textual reference in brackets. The value none signifies that the name is omitted either in the person’s first mention or throughout the chronicle.</td>
+                    </tr>
+                    <tr>
+                        <td>Consanguinea l Kinship</td>
+                        <td>
+                            This field records the information available on the woman’s blood relatives. The possible values are <strong>mother, father, sister(s), brother(s)</strong> (both including step- siblings), and <strong>other(s)</strong> (used for relatives such as grandparents, cousins, uncles, aunts, etc.). Values are entered when women’s ties to people are mentioned for the first time in the <em>Crónica de Castilla</em>. The value none signifies that the work contains no kinship information.<br>
+                            Due to the common practice of expressing kinship via male relatives, this data can be explicit or inferred from familial/genealogical passages that mention the identified women. Passages with no references to women are not considered. If there is additional kinship information in subsequent mentions of women, the corresponding value is entered. Repeated kinship information in subsequent references is not recorded in this phase. When passages contain contradicting statements, an asterisk (*) is used to make the user aware of these inconsistencies. If the information on parents is inconclusive, a question mark (?) is placed after the recorded value. Users are advised to check the Notes field for explanations.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Religion</td>
+                        <td>Possible values are <strong>Christian, Muslim, Jewish,</strong> or <strong>uncertain.</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Religion Flag</td>
+                        <td>
+                            The field indicates how a person’s religion is determined. Possible values are <strong>saint, explicit</strong> (these two values require an explicit statement in the <em>Crónica de Castilla</em>), <strong>action/attitude</strong> (evidenced through actions such as prayer or expressions such as ‘serves God’), <strong>implicit</strong> (when religious affiliation is inferred—see the criteria below), <strong>probably</strong> (when it seems likely based on the context of the reference, but there is not enough information), and <strong>lacking information</strong> (for when no information is available). The only value that can be entered more than once per <u>Standard Name</u> is <strong>action/attitude.</strong><br>
+                            For the value <strong>implicit</strong> to be recorded in the women’s first mention, two out of three criteria need to be fulfilled:
+                            <ol>
+                            <li>Her recorded name is typical for a specific religious community;
+                            <li>She is related by blood or marriage to members of that religious community, or her patronymics indicate a particular religious affiliation (e.g., Fernández &gt; the woman’s father is named Fernando &gt; he is Christian). In the case of anonymous groups, their men must be explicitly described as Christian, Muslim, or Jewish;</li>
+                            <li>She is linked to places or realms that are representative of that religious community (note: due to shifting borders, these places need to be appropriately contextualized).</li>
+                            </ol>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Traits</td>
+                        <td>This field records mentions of personal characteristics understood as <strong>intellectual, physical</strong>, and <strong>moral</strong> (whether moral from the perspective of Christianity or courtly culture). These values are based on adjectives or descriptive statements in the chronicle, and they must not be confused with how somebody acts in a specific situation. Entries are also created when subsequent mentions of women refer to already recorded traits.</td>
+                    </tr>
+                    <tr>
+                        <td>Partnership</td>
+                        <td>The entries record the first’s mention of a partner, regardless of the duration of the relationship. Possible values are <strong>none</strong> (if the chronicle states that the woman never marries or that she becomes a nun), <strong>liaison</strong> (for non-marital interactions of a sexual nature, from one encounter to long-term concubinage relationships; one entry per partner), <strong>marriage arrangement</strong> (from negotiations to proposals; one entry per potential partner), <strong>marriage</strong> (one entry per partner, even if the marriage is later dissolved), and <strong>unclear</strong> (when the available information is not enough to specify a relationship). Users are advised to consult the Notes field for further explanation.</td>
+                    </tr>
+                    <tr>
+                        <td>Motherhood</td>
+                        <td>Possible values are <strong>no children</strong> (when a woman is explicitly described as not having offspring), <strong>pregnancy</strong> (when it is explicitly mentioned; one entry per partner/child), <strong>children</strong> (one entry per partner, irrespective of the number of children), <strong>unclear</strong> (when motherhood is uncertain, usually due to textual ambiguities). If additional offspring are mentioned for the first time at a later point, a new record with the value <strong>children</strong> is made.</td>
+                    </tr>
+                    <tr>
+                        <td>Physical Violence</td>
+                        <td>This field refers to instances of violence done to or by the women in the chronicle. Possible values are <strong>assault, rape, murder, mourning,</strong> and <strong>captivity.</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Passing Away</td>
+                        <td>Possible values are <strong>death</strong> (not applicable to saints), <strong>resting place</strong> (information on the location), <strong>funeral</strong> (the value is recorded when non-locative burial details are provided; not applicable to saints), <strong>translation</strong> (only for saints).</td>
+                    </tr>
+                    <tr>
+                        <td>Case Summary</td>
+                        <td>This free-text field contextualizes or summarizes in English the quoted excerpt, which was used to generate the previously listed data. It includes important names and events to facilitate searching and provide context for the entered values.</td>
+                    </tr>
+                    <tr>
+                        <td>Excerpt</td>
+                        <td>This field contains quotes from the <em>Crónica de Castilla</em>. Omissions are signaled by an ellipsis ( … ). The quoted text is from manuscript P, while forward slashes enclose textual variants from manuscript G.</td>
+                    </tr>
+                    <tr>
+                        <td>Reference</td>
+                        <td>This field provides bibliographical references based on the 2010 edition of the <em>Crónica de Castilla</em> by Rochwert-Zuili. Roman numbers designate reigns/chapters, and Arabic numbers rubrics. The letters <strong>P</strong> and <strong>G</strong> in brackets indicate textual variants in those two manuscripts.</td>
+                    </tr>
+                    <tr>
+                        <td>Notes</td>
+                        <td>This field contains additional information helpful to the user.</td>
+                    </tr>
+                    <tr>
+                        <td>Further Exploration</td>
+                        <td>This field provides a list of chapters the recorded women are mentioned in.</td>
+                    </tr>
+                </table>
+                <p>This guide has been adapted to improve the user’s experience. A full, detailed codebook can be delivered upon request.</p>
+            </div> 
+        </div>
+    </main>
+</div>
+
+{% endblock content%}
+
+{% block scripts %}
+
+{% endblock %}
