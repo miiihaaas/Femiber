@@ -435,7 +435,7 @@
         <img src="../static/img/ahn-segment.jpg" class="d-flex mx-auto" style="max-height: 50vh;">
     </div>
     {% if criteria_options or filter_search_value %}
-    <div class="col" id="search-results">
+    <div class="col" id="search-results" style="display: none;">
         {% for people in people_results %}
         <div id="people-{{ people.id }}-id" class="people-details">
             <div class="row mb-3">
