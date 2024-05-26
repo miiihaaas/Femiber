@@ -323,13 +323,53 @@ def update_filters():
                         nuber_of_people=nuber_of_people
                         )
 
+
+@main.route('/people_id/<int:people_id>')
+def people_id(people_id):
+    people = People.query.get_or_404(people_id)
+    filter_search_value = people.standard_name.split(',')[0]
+    nuber_of_people = len(People.query.all())
+    filtered_cases = Cases.query.filter_by(person_id=people_id).all()
+    print(f'{filtered_cases=}')
+    
+    return render_template('database_search.html',
+                        filter_search_value=filter_search_value,
+                        filtered_cases=filtered_cases,
+                        unique_kinships_list=None,
+                        unique_religion_list=None,
+                        unique_religion_flag_list=None,
+                        unique_traits_list=None,
+                        unique_partnership_list=None,
+                        unique_motherhood_list=None,
+                        unique_violence_list=None,
+                        unique_passing_away_list=None,
+                        
+                        filter_people_value=[],
+                        filter_consang_kinship_value=[],
+                        filter_religion_value=[],
+                        filter_religion_flag_value=[],
+                        filter_traits_value=[],
+                        filter_partnership_value=[],
+                        filter_motherhood_value=[],
+                        filter_physical_violence_value=[],
+                        filter_passing_away_value=[],
+                        
+                        criteria_options=None,
+                        people_results=[people],
+                        nuber_of_people=nuber_of_people
+                        )
+
+
 @main.route("/", methods=['GET', 'POST'])
 @main.route('/home')
 def home():
     return render_template('home.html')
+
+
 @main.route('/contact')
 def contact():
     return render_template('contact.html')
+
 
 @main.route('/about')
 def about():
