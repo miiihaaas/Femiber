@@ -390,7 +390,7 @@
             <p><span class="criteriatitle">People:</span> <span class="criteriavalue">{{ filter_people_value[0] }}</span></p>
             {% endif %}
             {% if filter_consang_kinship_value %}
-            <p><span class="criteriatitle">Kindship:</span> {% for item in filter_consang_kinship_value %}  <span class="criteriavalue">{{ item }}</span> <span class="crta">|</span> {% endfor %} </p>
+            <p><span class="criteriatitle">Consanguineal Kinship:</span> {% for item in filter_consang_kinship_value %}  <span class="criteriavalue">{{ item }}</span> <span class="crta">|</span> {% endfor %} </p>
             {% endif %}
             {% if filter_religion_value %}
             <p><span class="criteriatitle">Religion:</span> {% for item in filter_religion_value %}  <span class="criteriavalue">{{ item }}</span> <span class="crta">|</span> {% endfor %} </p>
@@ -426,7 +426,7 @@
             {% endfor %} -->
 
             {% else %}
-            Chooze your criteria or search text
+            Choose your criteria
             {% endif %}
 
         </div>
