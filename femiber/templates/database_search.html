@@ -113,7 +113,7 @@
                 <div class="card-header" id="headingKinship">
                     <h5 class="mb-0">
                         <span class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseKinship" aria-expanded="true" aria-controls="collapseKinship">
-                            Kinship <img src="../static/img/arrow-up.png" class="arrow">
+                            Consanguineal Kinship <img src="../static/img/arrow-up.png" class="arrow">
                         </span>
                     </h5>
                 </div>
@@ -476,7 +476,7 @@
                 <div class="case-cri">
                     {% if case.consang_kinship and case.consang_kinship|length > 2 %}
                     <div>
-                        <span class="diamondsm">Consanguinity</span>
+                        <span class="diamondsm">Consanguineal Kinship</span>
                             {% set temp = case.consang_kinship.removeprefix("[").removesuffix("]") %}
                             {% set temp = temp.split(", ") %}
                             {% for item in temp %}
@@ -506,7 +506,7 @@
                     {% endif %}
                     {% if case.religion_flag and case.religion_flag|length > 2 %}
                     <div>
-                        <span class="diamondsm">Religion flag</span>
+                        <span class="diamondsm">Religion Flag</span>
                             {% set temp = case.religion_flag.removeprefix("[").removesuffix("]") %}
                             {% set temp = temp.split(", ") %}
                             {% for item in temp %}
@@ -566,7 +566,7 @@
                     {% endif %}
                     {% if case.physical_violence and case.physical_violence|length > 2 %}
                     <div>
-                        <span class="diamondsm">Violence & Transgression</span>
+                        <span class="diamondsm">Physical Violence</span>
                             {% set temp = case.physical_violence.removeprefix("[").removesuffix("]") %}
                             {% set temp = temp.split(", ") %}
                             {% for item in temp %}
@@ -581,7 +581,7 @@
                     {% endif %}
                     {% if case.passing_away and case.passing_away|length > 2 %}
                     <div>
-                        <span class="diamondsm">Death</span>
+                        <span class="diamondsm">Passing Away</span>
                             {% set temp = case.passing_away.removeprefix("[").removesuffix("]") %}
                             {% set temp = temp.split(", ") %}
                             {% for item in temp %}
