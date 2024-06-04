@@ -378,40 +378,49 @@
     <div class="col-lg-2">
         <div class="border-bottom mb-2 cccolor">
             {% if criteria_options or filter_search_value %}
-                <h3 class="malomanje">Criteria</h3>
+                <h3>Criteria</h3>
                 <a class="diamond mb-3" href="{{ url_for('main.database_search') }}" onclick="uncheckAll()">Clear criteria</a>
             {% else %}
-                <h3 class="malomanje">Criteria</h3>
+                <h3>Criteria</h3>
             {% endif %}
             {% if filter_search_value %}
             <p><span class="criteriatitle">Search:</span> {{ filter_search_value }}</p>
             {% endif %}
             {% if filter_people_value %}
-            <p><span class="criteriatitle">People:</span> <span class="criteriavalue">{{ filter_people_value[0] }}</span></p>
+            <!-- <p><span class="criteriatitle">People:</span> <span class="criteriavalue">{{ filter_people_value[0] }}</span></p> -->
+            <p><span class="criteriatitle">People:</span> <span class="criteriavalue">{{ filter_people_value[0] }} <button class="remove-filter" data-filter-type="people" data-filter-value="{{ filter_people_value[0] }}">x</button></span></p>
             {% endif %}
             {% if filter_consang_kinship_value %}
-            <p><span class="criteriatitle">Consanguineal kinship:</span> {% for item in filter_consang_kinship_value %}  <span class="criteriavalue">{{ item }}</span> <span class="crta">|</span> {% endfor %} </p>
+            <!-- <p><span class="criteriatitle">Consanguineal Kinship:</span> {% for item in filter_consang_kinship_value %}  <span class="criteriavalue">{{ item }}</span> <span class="crta">|</span> {% endfor %} </p> -->
+            <p><span class="criteriatitle">Consanguineal Kinship:</span> {% for item in filter_consang_kinship_value %}  <span class="criteriavalue">{{ item }} <button class="remove-filter" data-filter-type="kinship" data-filter-value="{{ item }}">x</button></span> <span class="crta">|</span> {% endfor %} </p>
             {% endif %}
             {% if filter_religion_value %}
-            <p><span class="criteriatitle">Religion:</span> {% for item in filter_religion_value %}  <span class="criteriavalue">{{ item }}</span> <span class="crta">|</span> {% endfor %} </p>
+            <!-- <p><span class="criteriatitle">Religion:</span> {% for item in filter_religion_value %}  <span class="criteriavalue">{{ item }}</span> <span class="crta">|</span> {% endfor %} </p> -->
+            <p><span class="criteriatitle">Religion:</span> {% for item in filter_religion_value %}  <span class="criteriavalue">{{ item }} <button class="remove-filter" data-filter-type="religion" data-filter-value="{{ item }}">x</button></span> <span class="crta">|</span> {% endfor %} </p>
             {% endif %}
             {% if filter_religion_flag_value %}
-            <p><span class="criteriatitle">Religion flag:</span> {% for item in filter_religion_flag_value %}  <span class="criteriavalue">{{ item }}</span> <span class="crta">|</span> {% endfor %} </p>
+            <!-- <p><span class="criteriatitle">Religion flag:</span> {% for item in filter_religion_flag_value %}  <span class="criteriavalue">{{ item }}</span> <span class="crta">|</span> {% endfor %} </p> -->
+            <p><span class="criteriatitle">Religion flag:</span> {% for item in filter_religion_flag_value %}  <span class="criteriavalue">{{ item }} <button class="remove-filter" data-filter-type="religion_flag" data-filter-value="{{ item }}">x</button></span> <span class="crta">|</span> {% endfor %} </p>
             {% endif %}
             {% if filter_traits_value %}
-            <p><span class="criteriatitle">Traits:</span> {% for item in filter_traits_value %}  <span class="criteriavalue">{{ item }}</span> <span class="crta">|</span> {% endfor %} </p>
+            <!-- <p><span class="criteriatitle">Traits:</span> {% for item in filter_traits_value %}  <span class="criteriavalue">{{ item }}</span> <span class="crta">|</span> {% endfor %} </p> -->
+            <p><span class="criteriatitle">Traits:</span> {% for item in filter_traits_value %}  <span class="criteriavalue">{{ item }} <button class="remove-filter" data-filter-type="trait" data-filter-value="{{ item }}">x</button></span> <span class="crta">|</span> {% endfor %} </p>
             {% endif %}
             {% if filter_partnership_value %}
-            <p><span class="criteriatitle">Partnership:</span> {% for item in filter_partnership_value %}  <span class="criteriavalue">{{ item }}</span> <span class="crta">|</span> {% endfor %} </p>
+            <!-- <p><span class="criteriatitle">Partnership:</span> {% for item in filter_partnership_value %}  <span class="criteriavalue">{{ item }}</span> <span class="crta">|</span> {% endfor %} </p> -->
+            <p><span class="criteriatitle">Partnership:</span> {% for item in filter_partnership_value %}  <span class="criteriavalue">{{ item }} <button class="remove-filter" data-filter-type="partnership" data-filter-value="{{ item }}">x</button></span> <span class="crta">|</span> {% endfor %} </p>
             {% endif %}
             {% if filter_motherhood_value %}
-            <p><span class="criteriatitle">Motherhood:</span> {% for item in filter_motherhood_value %}  <span class="criteriavalue">{{ item }}</span> <span class="crta">|</span> {% endfor %} </p>
+            <!-- <p><span class="criteriatitle">Motherhood:</span> {% for item in filter_motherhood_value %}  <span class="criteriavalue">{{ item }}</span> <span class="crta">|</span> {% endfor %} </p> -->
+            <p><span class="criteriatitle">Motherhood:</span> {% for item in filter_motherhood_value %}  <span class="criteriavalue">{{ item }} <button class="remove-filter" data-filter-type="motherhood" data-filter-value="{{ item }}">x</button></span> <span class="crta">|</span> {% endfor %} </p>
             {% endif %}
             {% if filter_physical_violence_value %}
-            <p><span class="criteriatitle">Violence & transgression:</span> {% for item in filter_physical_violence_value %}  <span class="criteriavalue">{{ item }}</span> <span class="crta">|</span> {% endfor %} </p>
+            <!-- <p><span class="criteriatitle">Violence & Transgression:</span> {% for item in filter_physical_violence_value %}  <span class="criteriavalue">{{ item }}</span> <span class="crta">|</span> {% endfor %} </p> -->
+            <p><span class="criteriatitle">Physical Violence:</span> {% for item in filter_physical_violence_value %}  <span class="criteriavalue">{{ item }} <button class="remove-filter" data-filter-type="violence" data-filter-value="{{ item }}">x</button></span> <span class="crta">|</span> {% endfor %} </p>
             {% endif %}
             {% if filter_passing_away_value %}
-            <p><span class="criteriatitle">Death:</span> {% for item in filter_passing_away_value %}  <span class="criteriavalue">{{ item }}</span> <span class="crta">|</span> {% endfor %} </p>
+            <!-- <p><span class="criteriatitle">Death:</span> {% for item in filter_passing_away_value %}  <span class="criteriavalue">{{ item }}</span> <span class="crta">|</span> {% endfor %} </p> -->
+            <p><span class="criteriatitle">Death:</span> {% for item in filter_passing_away_value %}  <span class="criteriavalue">{{ item }} <button class="remove-filter" data-filter-type="passing_away" data-filter-value="{{ item }}">x</button></span> <span class="crta">|</span> {% endfor %} </p>
             {% endif %}
             
         </div>
@@ -745,6 +754,24 @@
         // Clean up localStorage on page unload
         $(window).on('beforeunload', function() {
             localStorage.clear();
+        });
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.remove-filter').forEach(button => {
+            button.addEventListener('click', function() {
+                const filterType = this.getAttribute('data-filter-type');
+                const filterValue = this.getAttribute('data-filter-value');
+                
+                // Find the corresponding input element and uncheck it
+                const inputElement = document.querySelector(`input[name="${filterType}"][value="${filterValue}"]`);
+                if (inputElement) {
+                    inputElement.checked = false;
+                }
+                // Optionally, you can submit the form to refresh the page with updated filters
+                document.querySelector('form').submit();
+            });
         });
     });
 </script>
