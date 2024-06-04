@@ -12,7 +12,7 @@
     </div>
 </div>
 
-<div class="wrapper d-flex align-items-stretch">
+<div class="wrapper d-flex align-items-stretch pt-0">
     <main role="main" class="container">
         <div class="row">
             <div class="col-md-12">
@@ -113,7 +113,7 @@
                 <div class="card-header" id="headingKinship">
                     <h5 class="mb-0">
                         <span class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseKinship" aria-expanded="true" aria-controls="collapseKinship">
-                            Consanguineal Kinship <img src="../static/img/arrow-up.png" class="arrow">
+                            Consanguineal kinship <img src="../static/img/arrow-up.png" class="arrow">
                         </span>
                     </h5>
                 </div>
@@ -179,7 +179,7 @@
                 <div class="card-header" id="headingReligionFlag">
                     <h5 class="mb-0">
                         <span class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseReligionFlag" aria-expanded="true" aria-controls="collapseReligionFlag">
-                            Religion Flag <img src="../static/img/arrow-up.png" class="arrow">
+                            Religion flag <img src="../static/img/arrow-up.png" class="arrow">
                         </span>
                     </h5>
                 </div>
@@ -311,7 +311,7 @@
                 <div class="card-header" id="headingViolence">
                     <h5 class="mb-0">
                         <span class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseViolence" aria-expanded="true" aria-controls="collapseViolence">
-                            Physical Violence <img src="../static/img/arrow-up.png" class="arrow">
+                            Physical violence <img src="../static/img/arrow-up.png" class="arrow">
                         </span>
                     </h5>
                 </div>
@@ -344,7 +344,7 @@
                 <div class="card-header" id="headingPassingAway">
                     <h5 class="mb-0">
                         <span class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapsePassingAway" aria-expanded="true" aria-controls="collapsePassingAway">
-                            Passing Away <img src="../static/img/arrow-up.png" class="arrow">
+                            Passing away <img src="../static/img/arrow-up.png" class="arrow">
                         </span>
                     </h5>
                 </div>
@@ -378,10 +378,10 @@
     <div class="col-lg-2">
         <div class="border-bottom mb-2 cccolor">
             {% if criteria_options or filter_search_value %}
-                <h3>Criteria</h3>
+                <h3 class="malomanje">Criteria</h3>
                 <a class="diamond mb-3" href="{{ url_for('main.database_search') }}" onclick="uncheckAll()">Clear criteria</a>
             {% else %}
-                <h3>Criteria</h3>
+                <h3 class="malomanje">Criteria</h3>
             {% endif %}
             {% if filter_search_value %}
             <p><span class="criteriatitle">Search:</span> {{ filter_search_value }}</p>
@@ -390,7 +390,7 @@
             <p><span class="criteriatitle">People:</span> <span class="criteriavalue">{{ filter_people_value[0] }}</span></p>
             {% endif %}
             {% if filter_consang_kinship_value %}
-            <p><span class="criteriatitle">Consanguineal Kinship:</span> {% for item in filter_consang_kinship_value %}  <span class="criteriavalue">{{ item }}</span> <span class="crta">|</span> {% endfor %} </p>
+            <p><span class="criteriatitle">Consanguineal kinship:</span> {% for item in filter_consang_kinship_value %}  <span class="criteriavalue">{{ item }}</span> <span class="crta">|</span> {% endfor %} </p>
             {% endif %}
             {% if filter_religion_value %}
             <p><span class="criteriatitle">Religion:</span> {% for item in filter_religion_value %}  <span class="criteriavalue">{{ item }}</span> <span class="crta">|</span> {% endfor %} </p>
@@ -408,7 +408,7 @@
             <p><span class="criteriatitle">Motherhood:</span> {% for item in filter_motherhood_value %}  <span class="criteriavalue">{{ item }}</span> <span class="crta">|</span> {% endfor %} </p>
             {% endif %}
             {% if filter_physical_violence_value %}
-            <p><span class="criteriatitle">Violence & Transgression:</span> {% for item in filter_physical_violence_value %}  <span class="criteriavalue">{{ item }}</span> <span class="crta">|</span> {% endfor %} </p>
+            <p><span class="criteriatitle">Violence & transgression:</span> {% for item in filter_physical_violence_value %}  <span class="criteriavalue">{{ item }}</span> <span class="crta">|</span> {% endfor %} </p>
             {% endif %}
             {% if filter_passing_away_value %}
             <p><span class="criteriatitle">Death:</span> {% for item in filter_passing_away_value %}  <span class="criteriavalue">{{ item }}</span> <span class="crta">|</span> {% endfor %} </p>
@@ -417,7 +417,7 @@
         </div>
         <div>
             {% if criteria_options or filter_search_value %}
-            <h3>Results ({{ people_results|length }}/{{ nuber_of_people }})</h3>
+            <h3 class="malomanje">Results ({{ people_results|length }}/{{ nuber_of_people }})</h3>
             {% for people in people_results %}
             <span class="result-case people-input" onclick="toggleExtraClass(this)" data-people-id="{{ people.id }}">{{ people.standard_name }}</span>
             {% endfor %}
@@ -432,7 +432,7 @@
         </div>
     </div>
     <div class="col" id="no-results">
-        <img src="../static/img/ahn-segment.jpg" class="d-flex mx-auto" style="max-height: 50vh;">
+        <img src="../static/img/no-result-bg.png" class="d-flex mx-auto" style="max-height: 50vh;">
     </div>
     {% if criteria_options or filter_search_value %}
     <div class="col" id="search-results" style="display: none;">
@@ -440,8 +440,8 @@
         <div id="people-{{ people.id }}-id" class="people-details">
             <div class="row mb-3">
                 <div class="col-9">
-                    <h2>{{ people.standard_name.split(',')[0] }}</h2>
-                    <h3>{{ people.standard_name.split(',')[1] }}</h3>
+                    <h2 class="accent-text">{{ people.standard_name.split(',')[0] }}</h2>
+                    <h3 class="smanjiga">{{ people.standard_name.split(',')[1] }}</h3>
                 </div>
                 {% if people.wikidata %}
                 <div class="col d-flex justify-content-end">
@@ -454,7 +454,7 @@
                     {{ people.about }}
                 </div>
                 {% if people.recorded_names %}
-                <div>
+                <div class="just-bordered">
                     <strong>Recorded names:</strong> {{ people.recorded_names }}
                 </div>
                 {% endif %}
@@ -475,121 +475,121 @@
                 </div>
                 <div class="case-cri">
                     {% if case.consang_kinship and case.consang_kinship|length > 2 %}
-                    <div>
+                    <div class="no-last-one">
                         <span class="diamondsm">Consanguineal Kinship</span>
                             {% set temp = case.consang_kinship.removeprefix("[").removesuffix("]") %}
                             {% set temp = temp.split(", ") %}
                             {% for item in temp %}
                                 {% set item = item.removeprefix('"').removesuffix('"') %}
                                 {% if item in filter_consang_kinship_value %}
-                                    <strong>{{ item }}</strong>
+                                    <strong>{{ item }};</strong>
                                 {% else %}
-                                    {{ item }}
+                                    {{ item }};
                                 {% endif %}
                             {% endfor %}
                     </div>
                     {% endif %}
                     {% if case.religion and case.religion|length > 2%}
-                    <div>
+                    <div class="no-last-one">
                         <span class="diamondsm">Religion</span>
                             {% set temp = case.religion.removeprefix("[").removesuffix("]") %}
                             {% set temp = temp.split(", ") %}
                             {% for item in temp %}
                                 {% set item = item.removeprefix('"').removesuffix('"') %}
                                 {% if item in filter_religion_value %}
-                                    <strong>{{ item }}</strong>
+                                    <strong>{{ item }};</strong>
                                 {% else %}
-                                    {{ item }}
+                                    {{ item }};
                                 {% endif %}
                             {% endfor %}
                     </div>
                     {% endif %}
                     {% if case.religion_flag and case.religion_flag|length > 2 %}
-                    <div>
+                    <div class="no-last-one">
                         <span class="diamondsm">Religion Flag</span>
                             {% set temp = case.religion_flag.removeprefix("[").removesuffix("]") %}
                             {% set temp = temp.split(", ") %}
                             {% for item in temp %}
                                 {% set item = item.removeprefix('"').removesuffix('"') %}
                                 {% if item in filter_religion_flag_value %}
-                                    <strong>{{ item }}</strong>
+                                    <strong>{{ item }};</strong>
                                 {% else %}
-                                    {{ item }}
+                                    {{ item }};
                                 {% endif %}
                             {% endfor %}
                     </div>
                     {% endif %}
                     {% if case.traits and case.traits|length > 2 %}
-                    <div>
+                    <div class="no-last-one">
                         <span class="diamondsm">Traits</span>
                             {% set temp = case.traits.removeprefix("[").removesuffix("]") %}
                             {% set temp = temp.split(", ") %}
                             {% for item in temp %}
                                 {% set item = item.removeprefix('"').removesuffix('"') %}
                                 {% if item in filter_traits_value %}
-                                    <strong>{{ item }}</strong>
+                                    <strong>{{ item }};</strong>
                                 {% else %}
-                                    {{ item }}
+                                    {{ item }};
                                 {% endif %}
                             {% endfor %}
                     </div>
                     {% endif %}
                     {% if case.partnership and case.partnership|length > 2 %}
-                    <div>
+                    <div class="no-last-one">
                         <span class="diamondsm">Partnership</span>
                             {% set temp = case.partnership.removeprefix("[").removesuffix("]") %}
                             {% set temp = temp.split(", ") %}
                             {% for item in temp %}
                                 {% set item = item.removeprefix('"').removesuffix('"') %}
                                 {% if item in filter_partnership_value %}
-                                    <strong>{{ item }}</strong>
+                                    <strong>{{ item }};</strong>
                                 {% else %}
-                                    {{ item }}
+                                    {{ item }};
                                 {% endif %}
                             {% endfor %}
                     </div>
                     {% endif %}
                     {% if case.motherhood and case.motherhood|length > 2 %}
-                    <div>
+                    <div class="no-last-one">
                         <span class="diamondsm">Motherhood</span>
                             {% set temp = case.motherhood.removeprefix("[").removesuffix("]") %}
                             {% set temp = temp.split(", ") %}
                             {% for item in temp %}
                                 {% set item = item.removeprefix('"').removesuffix('"') %}
                                 {% if item in filter_motherhood_value %}
-                                    <strong>{{ item }}</strong>
+                                    <strong>{{ item }};</strong>
                                 {% else %}
-                                    {{ item }}
+                                    {{ item }};
                                 {% endif %}
                             {% endfor %}
                     </div>
                     {% endif %}
                     {% if case.physical_violence and case.physical_violence|length > 2 %}
-                    <div>
+                    <div class="no-last-one">
                         <span class="diamondsm">Physical Violence</span>
                             {% set temp = case.physical_violence.removeprefix("[").removesuffix("]") %}
                             {% set temp = temp.split(", ") %}
                             {% for item in temp %}
                                 {% set item = item.removeprefix('"').removesuffix('"') %}
                                 {% if item in filter_physical_violence_value %}
-                                    <strong>{{ item }}</strong>
+                                    <strong>{{ item }};</strong>
                                 {% else %}
-                                    {{ item }}
+                                    {{ item }};
                                 {% endif %}
                             {% endfor %}
                     </div>
                     {% endif %}
                     {% if case.passing_away and case.passing_away|length > 2 %}
-                    <div>
+                    <div class="no-last-one">
                         <span class="diamondsm">Passing Away</span>
                             {% set temp = case.passing_away.removeprefix("[").removesuffix("]") %}
                             {% set temp = temp.split(", ") %}
                             {% for item in temp %}
                                 {% set item = item.removeprefix('"').removesuffix('"') %}
                                 {% if item in filter_passing_away_value %}
-                                    <strong>{{ item }}</strong>
+                                    <strong>{{ item }};</strong>
                                 {% else %}
-                                    {{ item }}
+                                    {{ item }};
                                 {% endif %}
                             {% endfor %}
                     </div>
