@@ -14,11 +14,11 @@
                         <h1>Welcome to <em>FEMIber CrCast!</em></h1>
                         <!--<p>Description</p>-->
                     </div>
-                    <img class="d-block w-100" src="../static/img/hero-slider-1.png" alt="First slide">
+                    <img class="d-block w-100" src="{{ url_for('static', filename='img/hero-slider-1.png') }}" alt="First slide">
                     
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block w-100" src="../static/img/hero-slider-3.png" alt="Second slide">
+                    <img class="d-block w-100" src="{{ url_for('static', filename='img/hero-slider-3.png') }}" alt="Second slide">
                     <div class="carousel-caption d-none d-md-block">
                         <!--<h1>Welcome to <em>FEMIber CrCast!</em></h1>
                         <p>Description</p>-->
@@ -44,7 +44,7 @@
         </div>
         <div class="row">
             <div class="col-md-3">
-                <img src="../static/img/ahn-left-segment.jpg" alt="" class="img-fluid">
+                <img src="{{ url_for('static', filename='img/ahn-left-segment.jpg') }}" alt="" class="img-fluid">
             </div>
             <div class="col-md-6">
                 <p>Interested in how women were portrayed in medieval chronicles of the Iberian Peninsula? Look no further!</p>
@@ -56,7 +56,7 @@
                 <p>For further information, see the <a href="{{ url_for('main.database_guide') }}">Codebook Guide</a> and the <a href="{{ url_for('main.about') }}">About page</a>.</p>
                 <p>Please <a href="{{ url_for('main.contact') }}">get in touch</a> if you have similar interests, if you are experiencing issues with the website, or if you notice any mistakes.</p>
                 <div class="d-flex justify-content-center">
-                    <img src="../static/img/femiber-logo.jpg" alt="" class="img-fluid mw-30 pt-4">
+                    <img src="{{ url_for('static', filename='img/femiber-logo.jpg') }}" alt="" class="img-fluid mw-30 pt-4">
                 </div>
                 <!--
                 <img src="../static/img/bnf-espagnol-12-f.jpg" alt="BnF Espagnol 12 f.11" class="img-fluid cursor-pointer" data-bs-toggle="modal" data-bs-target="#imageModal">
@@ -76,7 +76,7 @@
                 -->
             </div>
             <div class="col-md-3">
-                <img src="../static/img/ahn-right-segment.jpg" alt="" class="img-fluid float-right">
+                <img src="{{ url_for('static', filename='img/ahn-right-segment.jpg') }}" alt="" class="img-fluid float-right">
 
             </div>
         </div>

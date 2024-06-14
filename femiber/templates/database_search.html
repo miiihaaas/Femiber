@@ -35,7 +35,7 @@
                 <div class="card-header" id="headingPeople">
                     <h5 class="mb-0">
                         <span class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapsePeople" aria-expanded="true" aria-controls="collapsePeople">
-                            People <img src="../static/img/arrow-up.png" class="arrow">
+                            People <img src="{{ url_for('static', filename='img/arrow-up.png') }}" class="arrow">
                         </span>
                     </h5>
                 </div>
@@ -113,7 +113,7 @@
                 <div class="card-header" id="headingKinship">
                     <h5 class="mb-0">
                         <span class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseKinship" aria-expanded="true" aria-controls="collapseKinship">
-                            Consanguineal kinship <img src="../static/img/arrow-up.png" class="arrow">
+                            Consanguineal kinship <img src="{{ url_for('static', filename='img/arrow-up.png') }}" class="arrow">
                         </span>
                     </h5>
                 </div>
@@ -146,7 +146,7 @@
                 <div class="card-header" id="headingReligion">
                     <h5 class="mb-0">
                         <span class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseReligion" aria-expanded="true" aria-controls="collapseReligion">
-                            Religion <img src="../static/img/arrow-up.png" class="arrow">
+                            Religion <img src="{{ url_for('static', filename='img/arrow-up.png') }}" class="arrow">
                         </span>
                     </h5>
                 </div>
@@ -179,7 +179,7 @@
                 <div class="card-header" id="headingReligionFlag">
                     <h5 class="mb-0">
                         <span class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseReligionFlag" aria-expanded="true" aria-controls="collapseReligionFlag">
-                            Religion flag <img src="../static/img/arrow-up.png" class="arrow">
+                            Religion flag <img src="{{ url_for('static', filename='img/arrow-up.png') }}" class="arrow">
                         </span>
                     </h5>
                 </div>
@@ -212,7 +212,7 @@
                 <div class="card-header" id="headingTraits">
                     <h5 class="mb-0">
                         <span class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTraits" aria-expanded="true" aria-controls="collapseTraits">
-                            Traits <img src="../static/img/arrow-up.png" class="arrow">
+                            Traits <img src="{{ url_for('static', filename='img/arrow-up.png') }}" class="arrow">
                         </span>
                     </h5>
                 </div>
@@ -245,7 +245,7 @@
                 <div class="card-header" id="headingPartnership">
                     <h5 class="mb-0">
                         <span class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapsePartnership" aria-expanded="true" aria-controls="collapsePartnership">
-                            Partnership <img src="../static/img/arrow-up.png" class="arrow">
+                            Partnership <img src="{{ url_for('static', filename='img/arrow-up.png') }}" class="arrow">
                         </span>
                     </h5>
                 </div>
@@ -278,7 +278,7 @@
                 <div class="card-header" id="headingMotherhood">
                     <h5 class="mb-0">
                         <span class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseMotherhood" aria-expanded="true" aria-controls="collapseMotherhood">
-                            Motherhood <img src="../static/img/arrow-up.png" class="arrow">
+                            Motherhood <img src="{{ url_for('static', filename='img/arrow-up.png') }}" class="arrow">
                         </span>
                     </h5>
                 </div>
@@ -311,7 +311,7 @@
                 <div class="card-header" id="headingViolence">
                     <h5 class="mb-0">
                         <span class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseViolence" aria-expanded="true" aria-controls="collapseViolence">
-                            Physical violence <img src="../static/img/arrow-up.png" class="arrow">
+                            Physical violence <img src="{{ url_for('static', filename='img/arrow-up.png') }}" class="arrow">
                         </span>
                     </h5>
                 </div>
@@ -344,7 +344,7 @@
                 <div class="card-header" id="headingPassingAway">
                     <h5 class="mb-0">
                         <span class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapsePassingAway" aria-expanded="true" aria-controls="collapsePassingAway">
-                            Passing away <img src="../static/img/arrow-up.png" class="arrow">
+                            Passing away <img src="{{ url_for('static', filename='img/arrow-up.png') }}" class="arrow">
                         </span>
                     </h5>
                 </div>
@@ -441,7 +441,7 @@
         </div>
     </div>
     <div class="col" id="no-results">
-        <img src="../static/img/no-result-bg.png" class="d-flex mx-auto" style="max-height: 50vh;">
+        <img src="{{ url_for('static', filename='img/no-result-bg.png') }}" class="d-flex mx-auto" style="max-height: 50vh;">
     </div>
     {% if criteria_options or filter_search_value %}
     <div class="col" id="search-results" style="display: none;">
