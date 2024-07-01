@@ -179,7 +179,7 @@
                 <div class="card-header" id="headingReligionFlag">
                     <h5 class="mb-0">
                         <span class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseReligionFlag" aria-expanded="true" aria-controls="collapseReligionFlag">
-                            Religion flag <img src="{{ url_for('static', filename='img/arrow-up.png') }}" class="arrow">
+                            Religion Flag <img src="{{ url_for('static', filename='img/arrow-up.png') }}" class="arrow">
                         </span>
                     </h5>
                 </div>
@@ -400,7 +400,7 @@
             {% endif %}
             {% if filter_religion_flag_value %}
             <!-- <p><span class="criteriatitle">Religion flag:</span> {% for item in filter_religion_flag_value %}  <span class="criteriavalue">{{ item }}</span> <span class="crta">|</span> {% endfor %} </p> -->
-            <p><span class="criteriatitle">Religion flag:</span> {% for item in filter_religion_flag_value %}  <span class="criteriavalue">{{ item }} <button class="remove-filter" data-filter-type="religion_flag" data-filter-value="{{ item }}">x</button></span> <span class="crta">|</span> {% endfor %} </p>
+            <p><span class="criteriatitle">Religion Flag:</span> {% for item in filter_religion_flag_value %}  <span class="criteriavalue">{{ item }} <button class="remove-filter" data-filter-type="religion_flag" data-filter-value="{{ item }}">x</button></span> <span class="crta">|</span> {% endfor %} </p>
             {% endif %}
             {% if filter_traits_value %}
             <!-- <p><span class="criteriatitle">Traits:</span> {% for item in filter_traits_value %}  <span class="criteriavalue">{{ item }}</span> <span class="crta">|</span> {% endfor %} </p> -->
@@ -452,8 +452,8 @@
         <div id="people-{{ people.id }}-id" class="people-details">
             <div class="row mb-3">
                 <div class="col-9">
-                    <h2 class="accent-text">{{ people.standard_name.split(',')[0] }}</h2>
-                    <h3 class="smanjiga">{{ people.standard_name.split(',')[1] }}</h3>
+                    <h2 class="accent-text">{{ people.standard_name.split(',', 1)[0] }}</h2>
+                    <h3 class="smanjiga">{{ people.standard_name.split(',', 1)[1] }}</h3>
                 </div>
                 {% if people.wikidata %}
                 <div class="col d-flex justify-content-end">
