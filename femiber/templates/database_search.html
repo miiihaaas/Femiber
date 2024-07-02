@@ -443,7 +443,7 @@
         <p>Depending on your interests, you can select one or more filters/values from the filter panel on the left or use the free-text search box. Clickable Standard names of the people whose cases contain the search element(s) will be displayed as “Results”.</p>
         <p>After selecting one of the names from the list, the filtered case(s) linked to that individual/group will be listed on the right.</p>
         <p>Within cases, it is also possible to click on other women's names. This opens a new window with their profile page and all the cases in the database related to them.</p>
-        <p>Read the Database Guide for more information about the categories and their values.</p>
+        <p>Read the <a href="{{ url_for('main.database_guide') }}">Database Guide</a> for more information about the categories and their values.</p>
         <!-- <img src="{{ url_for('static', filename='img/no-result-bg.png') }}" class="d-flex mx-auto" style="max-height: 40vh;"> -->
     </div>
     {% if criteria_options or filter_search_value %}
