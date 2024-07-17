@@ -344,7 +344,7 @@
                 <div class="card-header" id="headingPassingAway">
                     <h5 class="mb-0">
                         <span class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapsePassingAway" aria-expanded="true" aria-controls="collapsePassingAway">
-                            Passing away <img src="{{ url_for('static', filename='img/arrow-up.png') }}" class="arrow">
+                            Decease <img src="{{ url_for('static', filename='img/arrow-up.png') }}" class="arrow">
                         </span>
                     </h5>
                 </div>
@@ -593,7 +593,7 @@
                     {% endif %}
                     {% if case.passing_away and case.passing_away|length > 2 %}
                     <div class="no-last-one">
-                        <span class="diamondsm">Passing Away</span>
+                        <span class="diamondsm">Decease</span>
                             {% set temp = case.passing_away.removeprefix("[").removesuffix("]") %}
                             {% set temp = temp.split(", ") %}
                             {% for item in temp %}
