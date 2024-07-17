@@ -131,3 +131,25 @@ input[type=checkbox]:checked + .custom-checkbox::after { display: block; }
     img.login-logo { max-width: 250px; /*-webkit-filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.3)); filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.3));*/ border-top-left-radius: 10px; border-top-right-radius: 5px;
         border: 5px solid #fff; border-bottom: 0; }
 }
+@media (max-width: 767px) {
+    .top-bar { text-align: center; }
+    img.login-logo { max-width: 280px; }
+    .navbar-nav { padding: 10px; }
+    nav.navbar .navbar-nav .nav-link:after { margin: 10px 0; }
+    .footer-top .container { flex-direction: column; }
+    .footer-top .container img { width: fit-content; margin: 10px auto; }
+    .page-title { padding: 20px 0 10px 0; }
+    .mob-center-text { text-align: center; }
+    .ord-1 { order: 1; }
+    .ord-2 { order: 2; width: 47%; }
+    .ord-3 { order: 3; width: 53%; }
+}
+@media (max-width: 480px) {
+    img.login-logo { max-width: 280px; }
+}
+@media (max-width: 400px) {
+    img.login-logo { max-width: 220px; }
+}
+@media (max-width: 320px) {
+    img.login-logo { max-width: 200px; }
+}
