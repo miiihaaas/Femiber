@@ -616,6 +616,15 @@
             </div>
         </div>
         {% endfor %}
+        {% for people in people_results %}
+        <div id="people-{{ people.id }}-id" class="people-details">
+            <div class="row myborderbottom"> 
+                <div class="just-bordered">
+                    <strong>Further exploration in the <a href="https://books.openedition.org/esb/63" target="_blank"><em>Crónica de Castilla</em></a>:</strong> {{ people.chapters_rubrics }}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
     </div>
     {% endif %}
 </div>
