@@ -136,8 +136,8 @@ input[type=checkbox]:checked + .custom-checkbox::after { display: block; }
     img.login-logo { max-width: 280px; }
     .navbar-nav { padding: 10px; }
     nav.navbar .navbar-nav .nav-link:after { margin: 10px 0; }
-    .footer-top .container { flex-direction: column; }
-    .footer-top .container img { width: fit-content; margin: 10px auto; }
+    .footer-top .container { /*flex-direction: column;*/ }
+    .footer-top .container img { width: 30%; /*margin: 10px auto;*/ }
     .page-title { padding: 20px 0 10px 0; }
     .mob-center-text { text-align: center; }
     .ord-1 { order: 1; }
