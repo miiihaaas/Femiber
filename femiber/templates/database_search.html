@@ -489,16 +489,25 @@
                     {% if case.consang_kinship and case.consang_kinship|length > 2 %}
                     <div class="no-last-one">
                         <span class="diamondsm">Consanguineal Kinship</span>
-                            {% set temp = case.consang_kinship.removeprefix("[").removesuffix("]") %}
-                            {% set temp = temp.split(", ") %}
-                            {% for item in temp %}
-                                {% set item = item.removeprefix('"').removesuffix('"') %}
+                        {% set temp = case.consang_kinship.removeprefix("[").removesuffix("]") %}
+                        {% set temp = temp.split(", ") %}
+                        {% for item in temp %}
+                            {% set item = item.removeprefix('"').removesuffix('"') %}
+                            {% if item[-1] in ['*', '?'] %}
+                                {% set base_item = item[:-1] %}
+                                {% if base_item in filter_consang_kinship_value %}
+                                    <strong>{{ item }};</strong>
+                                {% else %}
+                                    {{ item }};
+                                {% endif %}
+                            {% else %}
                                 {% if item in filter_consang_kinship_value %}
                                     <strong>{{ item }};</strong>
                                 {% else %}
                                     {{ item }};
                                 {% endif %}
-                            {% endfor %}
+                            {% endif %}
+                        {% endfor %}
                     </div>
                     {% endif %}
                     {% if case.religion and case.religion|length > 2%}
