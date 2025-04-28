@@ -375,6 +375,10 @@ def contact():
 def about():
     return render_template('about.html')
 
+@main.route('/charts')
+def charts():
+    return render_template('charts.html')
+
 
 @main.route('/database_guide')
 def database_guide():

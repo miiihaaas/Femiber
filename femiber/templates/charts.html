@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="page-title">
+    <div class="container">
+        <h1>Charts</h1>
+    </div>
+</div>
+
+<div class="wrapper d-flex align-items-stretch">
+    <main role="main" class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row mb-5">
+                    <div class="col-md-4">
+                        <img src="{{ url_for('static', filename='img/Figure-1-Distribution-of-PersonIDs-in-each-reign.jpg') }}" alt="" class="img-fluid pt-4 cursor-pointer">
+                        <p class="text-center">Distribution of PersonIDs in each reign</p>
+                    </div>
+                    <div class="col-md-4">
+                        <img src="{{ url_for('static', filename='img/Figure-2-Distribution-of-kinship-values-by-Standard-Name.jpg') }}" alt="" class="img-fluid pt-4 cursor-pointer">
+                        <p class="text-center">Distribution of kinship values by Standard Name</p>
+                    </div>
+                    <div class="col-md-4">
+                        <img src="{{ url_for('static', filename='img/Figure-3-Frequency-of-kinship-values.jpg') }}" alt="" class="img-fluid pt-4 cursor-pointer">
+                        <p class="text-center">Frequency of kinship values</p>
+                    </div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-4">
+                        <img src="{{ url_for('static', filename='img/Figure-4-Number-of-PersonIDs-with-explicitly-expressed-religion.jpg') }}" alt="" class="img-fluid pt-4 cursor-pointer">
+                        <p class="text-center">Number of PersonIDs with explicitly expressed religion</p>
+                    </div>
+                    <div class="col-md-4">
+                        <img src="{{ url_for('static', filename='img/Figure-5-Percentage-of-Religion-Flag-values.jpg') }}" alt="" class="img-fluid pt-4 cursor-pointer">
+                        <p class="text-center">Percentage of Religion Flag values</p>
+                    </div>
+                </div>
+                <p>
+                    More on these graphs and the database design can be found in the following article:<br>
+                    Blašković, Marija. “Women to the Forefront: A Case for Digital Medieval Prosopography.” Digital Studies/Le champ numérique 5,1 (2025): 1–28. DOI: 
+                    <a href="https://doi.org/10.16995/dscn.17618" target="_blank">https://doi.org/10.16995/dscn.17618 </a>
+                </p>
+            </div>
+        </div>
+    </main>
+
+</div>
+
+{% endblock content%}
+{% block scripts %}
+{% endblock %}
