@@ -117,6 +117,10 @@ input[type=checkbox]:checked + .custom-checkbox::after { display: block; }
 .carousel-control-next-icon, .carousel-control-prev-icon { background-color: #a34d4c; border-radius: 50px; background-size: 24px; }
 .carousel-indicators { display: none; }
 
+.lightbox { display: none; position: fixed; z-index: 1050; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.8); align-items: center; 
+    justify-content: center; }
+.lightbox img { max-width: 90%; max-height: 80%; box-shadow: 0 0 20px white; }
+
 /* dodao Mhas */
 /* dodao Mhas */
 #no-results p { text-align: justify; }

@@ -74,6 +74,7 @@
                                 <li class="nav-item"><a class="nav-link" href="{{ url_for('main.database_guide') }}">Database Guide</a></li>
                                 <li class="nav-item"><a class="nav-link" href="{{ url_for('main.database_search') }}">Database Search</a></li>
                                 <!--<li class="nav-item"><a class="nav-link disabled" href="#">Data visualizations</a></li>-->
+                                <li class="nav-item"><a class="nav-link" href="{{ url_for('main.charts') }}">Charts</a></li>
                                 <li class="nav-item"><a class="nav-link" href="{{ url_for('main.contact') }}">Contact</a></li>
                             </ul>
                         </div>
@@ -106,6 +107,32 @@
             </div>
         </footer>
 
+        <div id="lightbox" class="lightbox">
+            <img id="lightbox-img" src="" alt="">
+        </div>
+        <script>
+            // Selektori
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+          
+            // Selektiraj sve slike koje želiš da otvaraju lightbox
+            const images = document.querySelectorAll('.row img');
+          
+            // Klik na sliku
+            images.forEach(img => {
+              img.addEventListener('click', () => {
+                lightboxImg.src = img.src;
+                lightbox.style.display = 'flex';
+              });
+            });
+          
+            // Klik izvan slike zatvara lightbox
+            lightbox.addEventListener('click', (e) => {
+              if (e.target !== lightboxImg) {
+                lightbox.style.display = 'none';
+              }
+            });
+          </script>
 
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
