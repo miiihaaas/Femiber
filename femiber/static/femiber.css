@@ -119,7 +119,9 @@ input[type=checkbox]:checked + .custom-checkbox::after { display: block; }
 
 .lightbox { display: none; position: fixed; z-index: 1050; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.8); align-items: center; 
     justify-content: center; }
-.lightbox img { max-width: 90%; max-height: 80%; box-shadow: 0 0 20px white; }
+.lightbox img { max-width: 90%; max-height: 80%; }
+.bordered-img { border: 1px solid #ddd; transition: all ease 0.3s; }
+.bordered-img:hover { box-shadow: 0 0 20px #ccc; }
 
 /* dodao Mhas */
 /* dodao Mhas */
